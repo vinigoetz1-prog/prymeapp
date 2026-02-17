@@ -3,9 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pryme Fitness 10.2</title>
+    <title>Pryme Fitness 10.5</title>
     
-    <!-- Configurações para Web App (PWA) -->
+    <!-- Configurações PWA e Ícone iOS -->
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
@@ -40,105 +40,103 @@
         
         input:focus, textarea:focus { outline: none; border-color: #F97316; }
         
-        .logo-main { width: auto; max-width: 200px; height: 70px; object-fit: contain; }
-        .logo-header { width: auto; max-width: 120px; height: 40px; object-fit: contain; }
+        /* Logos sem deformação */
+        .logo-main { width: auto; max-width: 240px; max-height: 90px; object-fit: contain; }
+        .logo-header { width: auto; max-width: 140px; max-height: 45px; object-fit: contain; }
         .logo-glow { filter: drop-shadow(0 0 15px rgba(249, 115, 22, 0.3)); }
         
         #photo-upload { display: none; }
-
         .logo-placeholder {
             background-color: #F97316; color: #000; font-weight: 900;
             display: flex; align-items: center; justify-content: center;
             border-radius: 0.75rem; width: 45px; height: 45px;
         }
-
         .ranking-tab-active { border-bottom: 3px solid #F97316; color: #ffffff; }
         .water-glow { filter: drop-shadow(0 0 8px rgba(59, 130, 246, 0.5)); }
     </style>
 </head>
 <body class="antialiased overflow-hidden text-center">
 
-    <!-- Ecrã de Carregamento -->
+    <!-- Loading Screen -->
     <div id="loading-screen" class="fixed inset-0 z-[100] bg-[#050505] flex flex-col items-center justify-center text-center p-10">
         <img src="logo.png" alt="Pryme" class="logo-main logo-glow animate-pulse mb-8" onerror="this.outerHTML='<div class=\'w-16 h-16 logo-placeholder text-2xl mb-4\'>P</div>'">
         <div class="w-12 h-1 bg-zinc-800 rounded-full overflow-hidden">
             <div class="bg-orange-500 h-full w-1/2 animate-[progress_1.5s_infinite] origin-left"></div>
         </div>
-        <p class="mt-6 text-zinc-500 font-bold tracking-widest text-[10px] uppercase italic">Pryme Academy</p>
+        <p class="mt-6 text-zinc-500 font-bold tracking-widest text-[10px] uppercase italic">Pryme Ecossistema</p>
     </div>
 
     <!-- Auth Screen -->
     <div id="auth-screen" class="fixed inset-0 z-[90] bg-[#050505] flex flex-col p-8 hidden overflow-y-auto text-center">
         <div class="flex flex-col items-center mt-16 mb-12">
-            <img src="logo.png" alt="Pryme" class="logo-main logo-glow mb-2" onerror="this.style.display='none'">
-            <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-[0.4em] italic">Elite Fitness Ecosystem</p>
+            <img src="logo.png" alt="Pryme" class="logo-main logo-glow mb-4" onerror="this.style.display='none'">
+            <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-[0.4em] italic text-center text-center">Elite Fitness Ecosystem</p>
         </div>
         <div id="auth-container" class="space-y-6 animate-fade-in text-white"></div>
     </div>
 
     <!-- Main Container -->
     <div id="main-container" class="h-screen w-full flex flex-col hidden overflow-hidden relative">
-        <header class="p-6 flex justify-between items-center z-40 bg-[#050505]/90 backdrop-blur-md border-b border-white/5">
+        <header class="p-6 flex justify-between items-center z-40 bg-[#050505]/95 backdrop-blur-md border-b border-white/5">
             <div class="flex items-center">
                 <img src="logo.png" alt="Pryme" class="logo-header" onerror="this.outerHTML='<div class=\'logo-placeholder\'>P</div>'">
             </div>
-            <div class="flex items-center gap-4">
+            <div class="flex items-center gap-4 text-center">
                 <div class="flex items-center gap-1.5 bg-zinc-900/50 border border-zinc-800 px-3 py-1.5 rounded-full shadow-inner">
                     <i data-lucide="flame" id="streak-icon" class="w-4 h-4 text-zinc-600 transition-colors"></i>
                     <span id="header-streak" class="text-sm font-black text-white">0</span>
                 </div>
-                <button onclick="toggleSideMenu()" class="p-2 bg-zinc-900 rounded-2xl border border-zinc-800 active:scale-95 transition-transform">
-                    <i data-lucide="menu" class="w-6 h-6 text-white"></i>
+                <button onclick="toggleSideMenu()" class="p-2 bg-zinc-900 rounded-2xl border border-zinc-800 active:scale-95 transition-transform text-center">
+                    <i data-lucide="menu" class="w-6 h-6 text-white text-center"></i>
                 </button>
             </div>
         </header>
 
         <main id="app-content" class="flex-1 overflow-y-auto px-5 pb-32 pt-4"></main>
 
-        <!-- Navegação Inferior -->
         <nav class="fixed bottom-0 left-0 right-0 glass-card rounded-t-[2.5rem] border-t border-white/5 p-4 flex justify-around items-end z-50 safe-bottom pb-6">
-            <button onclick="navigate('workout')" id="nav-workout" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90">
+            <button onclick="navigate('workout')" id="nav-workout" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90 text-center text-center text-center">
                 <i data-lucide="dumbbell" class="w-6 h-6"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest italic">Início</span>
+                <span class="text-[9px] font-black uppercase tracking-widest italic text-center">Início</span>
             </button>
-            <button onclick="navigate('sheet')" id="nav-sheet" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90">
+            <button onclick="navigate('sheet')" id="nav-sheet" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90 text-center text-center text-center">
                 <i data-lucide="clipboard-list" class="w-6 h-6"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest italic">Planilha</span>
+                <span class="text-[9px] font-black uppercase tracking-widest italic text-center">Planilha</span>
             </button>
-            <button onclick="navigate('store')" id="nav-store" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90">
+            <button onclick="navigate('store')" id="nav-store" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90 text-center text-center text-center">
                 <i data-lucide="shopping-bag" class="w-6 h-6"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest italic">Loja</span>
+                <span class="text-[9px] font-black uppercase tracking-widest italic text-center">Loja</span>
             </button>
-            <button onclick="navigate('profile')" id="nav-profile" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90">
+            <button onclick="navigate('profile')" id="nav-profile" class="flex flex-col items-center gap-1 text-zinc-500 transition-all active:scale-90 text-center text-center text-center">
                 <i data-lucide="user" class="w-6 h-6"></i>
-                <span class="text-[9px] font-black uppercase tracking-widest italic">Perfil</span>
+                <span class="text-[9px] font-black uppercase tracking-widest italic text-center text-center">Perfil</span>
             </button>
         </nav>
 
         <div id="side-drawer" class="fixed inset-0 z-[60] pointer-events-none text-center">
             <div id="drawer-overlay" class="absolute inset-0 bg-black/60 opacity-0 transition-opacity duration-300" onclick="toggleSideMenu()"></div>
-            <div id="drawer-content" class="absolute right-0 top-0 bottom-0 w-80 bg-zinc-950 border-l border-zinc-800 translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-                <div class="p-6 flex justify-between items-center border-b border-zinc-900 text-white italic uppercase tracking-tighter text-center"><h2 class="text-xl font-black">Menu</h2><button onclick="toggleSideMenu()"><i data-lucide="x"></i></button></div>
-                <div class="flex-1 overflow-y-auto p-4 space-y-3 text-white uppercase text-xs font-bold tracking-widest italic text-left">
-                    <button onclick="toggleSideMenu(); openModal('achievements')" class="w-full p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white"><i data-lucide="award" class="text-orange-500"></i>Conquistas</button>
-                    <button onclick="toggleSideMenu(); openModal('ranking')" class="w-full p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white"><i data-lucide="trending-up" class="text-orange-500"></i>Ranking Academia</button>
-                    <button onclick="toggleSideMenu(); openModal('calendar')" class="w-full p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white"><i data-lucide="calendar" class="text-orange-500"></i>Vista Anual</button>
-                    <button onclick="toggleSideMenu(); openModal('notes')" class="w-full p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white"><i data-lucide="sticky-note" class="text-orange-500"></i>Anotações</button>
+            <div id="drawer-content" class="absolute right-0 top-0 bottom-0 w-80 bg-zinc-950 border-l border-zinc-800 translate-x-full transition-transform duration-300 flex flex-col shadow-2xl text-center">
+                <div class="p-6 flex justify-between items-center border-b border-zinc-900 text-white italic uppercase tracking-tighter text-center text-center"><h2 class="text-xl font-black text-center text-center">Menu</h2><button onclick="toggleSideMenu()"><i data-lucide="x"></i></button></div>
+                <div class="flex-1 overflow-y-auto p-4 space-y-3 text-white uppercase text-xs font-bold tracking-widest italic text-center">
+                    <button onclick="toggleSideMenu(); openModal('achievements')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white text-center text-center text-center"><i data-lucide="award" class="text-orange-500 text-center"></i>Conquistas</button>
+                    <button onclick="toggleSideMenu(); openModal('ranking')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white text-center text-center text-center text-center"><i data-lucide="trending-up" class="text-orange-500 text-center"></i>Ranking Academia</button>
+                    <button onclick="toggleSideMenu(); openModal('calendar')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white text-center text-center text-center text-center"><i data-lucide="calendar" class="text-orange-500 text-center"></i>Vista Anual</button>
+                    <button onclick="toggleSideMenu(); openModal('notes')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 hover:bg-zinc-900 transition-colors text-white text-center text-center text-center text-center"><i data-lucide="sticky-note" class="text-orange-500 text-center"></i>Anotações</button>
                 </div>
-                <div class="p-6 border-t border-zinc-900 space-y-2">
-                    <button onclick="handleLogout()" class="w-full p-4 rounded-3xl bg-zinc-900 text-zinc-500 font-bold border border-zinc-800 active:scale-95 transition-all uppercase text-[10px] tracking-widest italic">Sair da Conta</button>
-                    <button onclick="toggleSideMenu(); openModal('confirm_delete')" class="w-full p-4 rounded-3xl bg-red-500/10 text-red-500 font-bold border border-red-500/20 active:scale-95 transition-all uppercase text-[10px] tracking-widest italic text-red-500">Excluir Perfil</button>
+                <div class="p-6 border-t border-zinc-900 space-y-2 text-center text-center">
+                    <button onclick="handleLogout()" class="w-full p-4 rounded-3xl bg-zinc-900 text-zinc-500 font-bold border border-zinc-800 active:scale-95 transition-all uppercase text-[10px] tracking-widest italic text-center text-center text-center">Sair da Conta</button>
+                    <button onclick="toggleSideMenu(); openModal('confirm_delete')" class="w-full p-4 rounded-3xl bg-red-500/10 text-red-500 font-bold border border-red-500/20 active:scale-95 transition-all uppercase text-[10px] tracking-widest italic text-red-500 text-center text-center">Excluir Perfil</button>
                 </div>
             </div>
         </div>
     </div>
 
     <!-- Modais -->
-    <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none text-center"></div>
-    <div id="modal-overlay" class="fixed inset-0 z-[80] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4">
-        <div id="modal-box" class="w-full max-w-md bg-zinc-950 rounded-[2.5rem] border border-zinc-800 overflow-hidden flex flex-col max-h-[85vh]">
-            <div class="p-6 flex justify-between items-center border-b border-zinc-900 text-white italic uppercase tracking-tighter text-center"><h3 id="modal-title" class="text-xl font-black text-center">Modal</h3><button onclick="closeModal()"><i data-lucide="x" class="text-white"></i></button></div>
-            <div id="modal-content" class="p-6 overflow-y-auto"></div>
+    <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 z-[100] flex flex-col gap-2 pointer-events-none text-center text-center text-center text-center"></div>
+    <div id="modal-overlay" class="fixed inset-0 z-[80] bg-black/90 backdrop-blur-md hidden flex items-center justify-center p-4 text-center">
+        <div id="modal-box" class="w-full max-w-md bg-zinc-950 rounded-[2.5rem] border border-zinc-800 overflow-hidden flex flex-col max-h-[85vh] text-center">
+            <div class="p-6 flex justify-between items-center border-b border-zinc-900 text-white italic uppercase tracking-tighter text-center text-center"><h3 id="modal-title" class="text-xl font-black text-center text-center text-center">Modal</h3><button onclick="closeModal()"><i data-lucide="x" class="text-white text-center"></i></button></div>
+            <div id="modal-content" class="p-6 overflow-y-auto text-center"></div>
         </div>
     </div>
 
@@ -171,7 +169,7 @@
         const GYM_LON = -51.17387061571298; 
         const MAX_DISTANCE_METERS = 50; 
 
-        // --- ATTACH GLOBALS IMMEDIATELY ---
+        // --- ATTACH GLOBALS ---
         window.handleLogin = async () => {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
@@ -186,13 +184,9 @@
             try {
                 await signInWithPopup(auth, provider);
             } catch (e) {
-                console.error("Erro Google Auth:", e);
                 if (e.code === 'auth/unauthorized-domain') {
-                    // MENSAGEM ESPECÍFICA PARA O VINICIUS CONFIGURAR
-                    showToast("Configure este domínio no Firebase console!", true);
+                    showToast("Domínio não autorizado!", true);
                     openModal('auth_error_help');
-                } else if (e.code === 'auth/popup-blocked') {
-                    showToast("Pop-up bloqueado pelo navegador.", true);
                 } else {
                     showToast("Erro ao entrar com Google.", true);
                 }
@@ -306,12 +300,12 @@
         function getUpsellBannerHTML() {
             if (!userData || userData.plan === 'Pryme') return '';
             return `
-                <div class="animate-fade-in p-5 bg-gradient-to-r from-orange-600/20 to-zinc-900 border border-orange-500/20 rounded-[2.5rem] flex items-center justify-between gap-4 mb-6 cursor-pointer active:scale-[0.98] transition-all shadow-lg text-left" onclick="openModal('pryme_upsell')">
+                <div class="animate-fade-in p-5 bg-gradient-to-r from-orange-600/20 to-zinc-900 border border-orange-500/20 rounded-[2.5rem] flex items-center justify-between gap-4 mb-6 cursor-pointer active:scale-[0.98] transition-all shadow-lg text-left text-left text-left" onclick="openModal('pryme_upsell')">
                     <div class="flex items-center gap-3 text-white italic">
                         <div class="w-12 h-12 bg-orange-500 rounded-2xl flex items-center justify-center shadow-lg shadow-orange-500/20"><i data-lucide="crown" class="text-black w-6 h-6"></i></div>
-                        <div><h4 class="font-black text-sm uppercase italic tracking-tighter">Status <span class="text-orange-500 underline">Pryme</span></h4><p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">+15 pts por treino</p></div>
+                        <div><h4 class="font-black text-sm uppercase italic tracking-tighter">Ser <span class="text-orange-500 underline">Pryme</span></h4><p class="text-[10px] text-zinc-400 font-bold uppercase tracking-widest">+15 pts por treino</p></div>
                     </div>
-                    <i data-lucide="chevron-right" class="text-orange-500 w-5 h-5"></i>
+                    <i data-lucide="chevron-right" class="text-orange-500 w-5 h-5 text-center"></i>
                 </div>`;
         }
 
@@ -352,7 +346,7 @@
                     }
                     renderApp(); 
                 } else { renderOnboarding(); }
-            } catch (e) { showToast("Erro Firebase.", true); }
+            } catch (e) { showToast("Erro de sincronização.", true); }
         }
 
         async function saveUserData(data) {
@@ -360,9 +354,7 @@
             try { await setDoc(docRef, data, { merge: true }); userData = { ...(userData || {}), ...data }; return true; } catch (e) { return false; }
         }
 
-        window.confirmAccountDeletion = async () => {
-            try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid)); await deleteUser(user); location.reload(); } catch (e) { showToast("Faça login de novo!", true); }
-        };
+        window.handleLogout = () => signOut(auth).then(() => location.reload());
 
         function calculateDistance(lat1, lon1, lat2, lon2) {
             const R = 6371e3; const dLat = (lat2-lat1) * Math.PI/180; const dLon = (lon2-lon1) * Math.PI/180;
@@ -374,31 +366,22 @@
         function renderAuthUI() {
             const container = document.getElementById('auth-container');
             container.innerHTML = `
-                <div class="space-y-4 animate-fade-in text-white italic text-center">
+                <div class="space-y-4 animate-fade-in text-white italic text-center text-center">
                     ${authMode === 'login' ? `
                         <input type="email" id="email" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-white text-sm" placeholder="E-mail">
                         <input type="password" id="password" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-white text-sm" placeholder="Senha">
-                        <button onclick="handleLogin()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase shadow-xl active:scale-95 transition-all italic tracking-tighter">Entrar</button>
+                        <button onclick="handleLogin()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase shadow-xl active:scale-95 transition-all italic tracking-tighter text-center">Entrar</button>
                     ` : `
                         <input type="email" id="email" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-white text-sm" placeholder="E-mail">
                         <input type="password" id="password" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-white text-sm" placeholder="Senha (mín. 6)">
-                        <button onclick="handleSignup()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase shadow-xl active:scale-95 transition-all italic tracking-tighter">Cadastrar</button>
+                        <button onclick="handleSignup()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase shadow-xl active:scale-95 transition-all italic tracking-tighter text-center">Cadastrar</button>
                     `}
-                    
-                    <div class="flex items-center gap-4 my-6">
-                        <div class="h-[1px] bg-zinc-800 flex-1"></div>
-                        <span class="text-[10px] text-zinc-600 font-bold uppercase tracking-widest italic">Ou</span>
-                        <div class="h-[1px] bg-zinc-800 flex-1"></div>
-                    </div>
-
-                    <button onclick="handleGoogleLogin()" class="w-full bg-white text-black p-5 rounded-3xl font-black uppercase shadow-xl active:scale-95 transition-all italic tracking-tighter flex items-center justify-center gap-3">
+                    <div class="flex items-center gap-4 my-6"><div class="h-[1px] bg-zinc-800 flex-1"></div><span class="text-[10px] text-zinc-600 font-bold uppercase tracking-widest italic">Ou</span><div class="h-[1px] bg-zinc-800 flex-1"></div></div>
+                    <button onclick="handleGoogleLogin()" class="w-full bg-white text-black p-5 rounded-3xl font-black uppercase shadow-xl active:scale-95 transition-all italic tracking-tighter flex items-center justify-center gap-3 text-center">
                         <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                         Google Login
                     </button>
-
-                    <button onclick="toggleAuthMode()" class="w-full text-zinc-500 text-[10px] font-black uppercase mt-4 tracking-widest italic text-center">
-                        ${authMode === 'login' ? 'Novo por aqui? Criar perfil' : 'Já tenho conta. Login'}
-                    </button>
+                    <button onclick="toggleAuthMode()" class="w-full text-zinc-500 text-[10px] font-black uppercase mt-4 tracking-widest italic text-center">${authMode === 'login' ? 'Novo por aqui? Criar perfil' : 'Já tenho conta. Login'}</button>
                 </div>`;
             lucide.createIcons();
         }
@@ -409,8 +392,8 @@
             content.innerHTML = '';
             document.getElementById('header-streak').innerText = userData.streak || 0;
             const streakIcon = document.getElementById('streak-icon');
-            if (userData.streak > 0) streakIcon.classList.replace('text-zinc-600', 'text-orange-500');
-            else streakIcon.classList.replace('text-orange-500', 'text-zinc-600');
+            if (userData.streak > 0) { streakIcon.classList.remove('text-zinc-600'); streakIcon.classList.add('text-orange-500'); }
+            else { streakIcon.classList.remove('text-orange-500'); streakIcon.classList.add('text-zinc-600'); }
             
             ['workout', 'sheet', 'store', 'profile'].forEach(t => {
                 const b = document.getElementById(`nav-${t}`);
@@ -429,22 +412,22 @@
             container.innerHTML = `
                 <div class="animate-fade-in space-y-6 text-white italic text-center">
                     ${getUpsellBannerHTML()}
-                    <div class="p-8 bg-zinc-900/50 border border-zinc-800 rounded-[3rem] flex flex-col items-center shadow-xl">
-                        <p class="text-zinc-500 text-[10px] font-black uppercase mb-2 tracking-widest text-center">Sua Jornada</p>
-                        <h4 class="text-3xl font-black mb-6 text-white tracking-tighter italic uppercase underline decoration-orange-500 underline-offset-8 decoration-4 text-center">${userData.totalCheckins || 0} Treinos</h4>
-                        <div class="w-full bg-zinc-800 h-2 rounded-full mb-8 overflow-hidden text-center"><div class="bg-orange-500 h-full transition-all duration-1000 shadow-[0_0_10px_rgba(249,115,22,0.5)]" style="width: ${(userData.totalCheckins % 100)}%"></div></div>
+                    <div class="p-8 bg-zinc-900/50 border border-zinc-800 rounded-[3rem] flex flex-col items-center shadow-xl text-center text-center">
+                        <p class="text-zinc-500 text-[10px] font-black uppercase mb-2 tracking-widest text-center text-center">Sua Jornada</p>
+                        <h4 class="text-3xl font-black mb-6 text-white tracking-tighter italic uppercase underline decoration-orange-500 underline-offset-8 decoration-4 text-center text-center">${userData.totalCheckins || 0} Treinos</h4>
+                        <div class="w-full bg-zinc-800 h-2 rounded-full mb-8 overflow-hidden text-center text-center text-center"><div class="bg-orange-500 h-full transition-all duration-1000 shadow-[0_0_10px_rgba(249,115,22,0.5)]" style="width: ${(userData.totalCheckins % 100)}%"></div></div>
                         <button id="btn-checkin" onclick="handleCheckin()" ${userData.lastCheckin === today ? 'disabled' : ''} class="w-48 h-48 rounded-full border-[10px] border-zinc-950 flex flex-col items-center justify-center gap-2 shadow-2xl transition-all active:scale-95 ${userData.lastCheckin === today ? 'bg-zinc-800 opacity-50' : 'bg-pryme shadow-orange-500/30'}">
-                            <i data-lucide="${userData.lastCheckin === today ? 'check' : 'zap'}" class="text-black w-10 h-10"></i>
-                            <span id="btn-text" class="text-black font-black text-lg uppercase tracking-tight">CHECK-IN</span>
+                            <i data-lucide="${userData.lastCheckin === today ? 'check' : 'zap'}" class="text-black w-10 h-10 text-center text-center"></i>
+                            <span id="btn-text" class="text-black font-black text-lg uppercase tracking-tight text-center">CHECK-IN</span>
                         </button>
                     </div>
 
-                    <div class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between">
-                        <div class="flex items-center gap-4">
-                            <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center water-glow"><i data-lucide="droplet" class="text-blue-500"></i></div>
-                            <div class="text-left text-white italic"><p class="text-[10px] font-black uppercase text-zinc-500 italic tracking-widest">Hidratação</p><h4 class="text-xl font-black tracking-tighter">${userData.waterML || 0} ML</h4></div>
+                    <div class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between text-center text-center">
+                        <div class="flex items-center gap-4 text-center">
+                            <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center water-glow text-center"><i data-lucide="droplet" class="text-blue-500"></i></div>
+                            <div class="text-left text-white italic"><p class="text-[10px] font-black uppercase text-zinc-500 italic tracking-widest text-left">Hidratação</p><h4 class="text-xl font-black tracking-tighter">${userData.waterML || 0} ML</h4></div>
                         </div>
-                        <button onclick="addWater()" class="bg-zinc-800 text-blue-400 p-4 rounded-2xl active:scale-90 transition-all"><i data-lucide="plus" class="w-6 h-6"></i></button>
+                        <button onclick="addWater()" class="bg-zinc-800 text-blue-400 p-4 rounded-2xl active:scale-90 transition-all text-center"><i data-lucide="plus" class="w-6 h-6"></i></button>
                     </div>
                 </div>`;
         }
@@ -454,11 +437,11 @@
             container.innerHTML = `
                 <div class="animate-fade-in space-y-6 text-white italic text-center">
                     <div class="flex justify-between items-center text-center"><h2 class="text-2xl font-black italic uppercase text-white tracking-tighter text-center">Sua <span class="text-orange-500 underline decoration-2 text-center">Planilha</span></h2><button onclick="saveWorkout()" class="bg-orange-500 text-black px-6 py-2 rounded-2xl font-black text-[10px] uppercase italic tracking-widest active:scale-90 transition-all text-center">Salvar</button></div>
-                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x italic uppercase">
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x italic uppercase text-center text-center">
                         ${Array.from({length: freq}).map((_, i) => `
-                            <div class="min-w-[300px] bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-6 snap-center text-white italic">
+                            <div class="min-w-[300px] bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-6 snap-center text-white italic text-center">
                                 <h3 class="text-orange-500 font-black uppercase text-[10px] mb-6 text-center italic tracking-widest text-center">Dia ${i+1}</h3>
-                                <div class="space-y-4">
+                                <div class="space-y-4 text-center text-center text-center">
                                     ${Array.from({length: 10}).map((_, r) => {
                                         const exKey = "d"+(i+1)+"_r"+(r+1);
                                         const prKey = exKey+"_pr";
@@ -472,98 +455,64 @@
 
         function renderStore(container) {
             const items = [{ id: 'shirt_discount', name: 'Desconto Camiseta', cost: 900, icon: 'tag' },{ id: 'custom_workout', name: 'Treino Personalizado', cost: 915, icon: 'scroll-text' },{ id: 'shirt_full', name: 'Camiseta Pryme', cost: 1350, icon: 'shirt' },{ id: 'monthly_discount', name: 'Desconto Mensalidade', cost: 2250, icon: 'percent' },{ id: 'nutri_discount', name: 'Desconto Nutri', cost: 3000, icon: 'apple' }];
-            container.innerHTML = `<div class="animate-fade-in space-y-6 text-white italic text-center"><div class="p-8 bg-pryme rounded-[3rem] shadow-xl text-black text-center"><p class="text-black/60 text-[10px] font-black uppercase mb-1 tracking-widest italic text-center">Saldo Atual</p><h3 class="text-5xl font-black italic tracking-tighter text-black text-center">${userData.points || 0} PTS</h3></div><div class="grid grid-cols-1 gap-4">${items.map(item => { const canAfford = userData.points >= item.cost; return `<div class="p-5 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between shadow-lg text-center"><div class="flex items-center gap-4 text-center text-center"><div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center border border-white/5 text-center"><i data-lucide="${item.icon}" class="text-orange-500 w-8 h-8 text-center"></i></div><div class="text-center"><h4 class="font-bold text-sm text-white uppercase text-center">${esc(item.name)}</h4><p class="text-orange-500 text-[10px] uppercase font-black italic text-center">${item.cost} PTS</p></div></div><button onclick="handlePurchase('${item.id}', ${item.cost})" class="px-5 py-2 rounded-2xl text-[10px] font-black uppercase transition-all ${ canAfford ? 'bg-orange-500 text-black active:scale-95' : 'bg-zinc-800 text-zinc-600'}" ${!canAfford ? 'disabled' : ''}>Resgatar</button></div>`; }).join('')}</div></div>`;
+            container.innerHTML = `<div class="animate-fade-in space-y-6 text-white italic text-center"><div class="p-8 bg-pryme rounded-[3rem] shadow-xl text-black text-center text-center text-center"><p class="text-black/60 text-[10px] font-black uppercase mb-1 tracking-widest italic text-center text-center">Saldo Atual</p><h3 class="text-5xl font-black italic tracking-tighter text-black text-center text-center">${userData.points || 0} PTS</h3></div><div class="grid grid-cols-1 gap-4 text-center text-center">${items.map(item => { const canAfford = userData.points >= item.cost; return `<div class="p-5 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between shadow-lg text-center text-center"><div class="flex items-center gap-4 text-center text-center"><div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center border border-white/5 text-center text-center"><i data-lucide="${item.icon}" class="text-orange-500 w-8 h-8 text-center"></i></div><div class="text-center text-center"><h4 class="font-bold text-sm text-white uppercase text-center">${esc(item.name)}</h4><p class="text-orange-500 text-[10px] uppercase font-black italic text-center text-center">${item.cost} PTS</p></div></div><button onclick="handlePurchase('${item.id}', ${item.cost})" class="px-5 py-2 rounded-2xl text-[10px] font-black uppercase transition-all ${ canAfford ? 'bg-orange-500 text-black active:scale-95' : 'bg-zinc-800 text-zinc-600'}" ${!canAfford ? 'disabled' : ''}>Resgatar</button></div>`; }).join('')}</div></div>`;
         }
 
         function renderProfile(container) {
             const avatarUrl = userData.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.uid}`;
             container.innerHTML = `
-                <div class="animate-fade-in space-y-8 pb-10 flex flex-col items-center text-white italic text-center text-center">
-                    <div class="relative text-center">
-                        <div class="w-36 h-36 rounded-[2.5rem] bg-zinc-900 border-4 border-orange-500 overflow-hidden shadow-2xl avatar-glow text-center"><img src="${avatarUrl}" class="w-full h-full object-cover text-center text-center" id="profile-avatar"></div>
-                        <button onclick="triggerPhotoUpload()" class="absolute -right-2 -bottom-2 w-12 h-12 bg-orange-500 rounded-2xl border-4 border-[#050505] flex items-center justify-center text-black active:scale-90 transition-transform text-center"><i data-lucide="camera" class="w-5 h-5 text-center"></i></button>
+                <div class="animate-fade-in space-y-8 pb-10 flex flex-col items-center text-white italic text-center text-center text-center">
+                    <div class="relative text-center text-center">
+                        <div class="w-36 h-36 rounded-[2.5rem] bg-zinc-900 border-4 border-orange-500 overflow-hidden shadow-2xl avatar-glow text-center text-center text-center"><img src="${avatarUrl}" class="w-full h-full object-cover text-center text-center" id="profile-avatar"></div>
+                        <button onclick="triggerPhotoUpload()" class="absolute -right-2 -bottom-2 w-12 h-12 bg-orange-500 rounded-2xl border-4 border-[#050505] flex items-center justify-center text-black active:scale-90 transition-transform text-center text-center text-center"><i data-lucide="camera" class="w-5 h-5 text-center"></i></button>
                         <input type="file" id="photo-upload" accept="image/*" onchange="handlePhotoChange(event)">
                     </div>
-                    <h2 class="text-3xl font-black tracking-tighter uppercase text-white text-center">${esc(userData.name || 'Atleta')}</h2>
+                    <h2 class="text-3xl font-black tracking-tighter uppercase text-white text-center text-center text-center">${esc(userData.name || 'Atleta')}</h2>
                     ${getUpsellBannerHTML()}
-                    <div class="grid grid-cols-2 gap-4 w-full text-center">
-                        <div class="p-6 glass-card rounded-[2.5rem] text-center active:bg-zinc-800 transition-colors shadow-sm text-center" onclick="openWeightModal()"><p class="text-zinc-500 text-[10px] font-black uppercase mb-1 italic text-center text-center">Peso</p><h4 class="text-xl font-black italic text-white text-center">${userData.weight}KG</h4><i data-lucide="edit-2" class="w-3 h-3 text-orange-500 mx-auto mt-2 text-center"></i></div>
-                        <div class="p-6 glass-card rounded-[2.5rem] text-center shadow-sm text-center"><p class="text-zinc-500 text-[10px] font-black uppercase mb-1 italic text-center">Altura</p><h4 class="text-xl font-black italic text-white text-center">${userData.height}CM</h4></div>
+                    <div class="grid grid-cols-2 gap-4 w-full text-center text-center">
+                        <div class="p-6 glass-card rounded-[2.5rem] text-center active:bg-zinc-800 transition-colors shadow-sm text-center text-center text-center" onclick="openWeightModal()"><p class="text-zinc-500 text-[10px] font-black uppercase mb-1 italic text-center text-center text-center">Peso</p><h4 class="text-xl font-black italic text-white text-center text-center text-center">${userData.weight}KG</h4><i data-lucide="edit-2" class="w-3 h-3 text-orange-500 mx-auto mt-2 text-center text-center"></i></div>
+                        <div class="p-6 glass-card rounded-[2.5rem] text-center shadow-sm text-center text-center text-center"><p class="text-zinc-500 text-[10px] font-black uppercase mb-1 italic text-center text-center text-center text-center">Altura</p><h4 class="text-xl font-black italic text-white text-center text-center text-center text-center">${userData.height}CM</h4></div>
                     </div>
-                    <div class="p-6 bg-zinc-900/30 border border-zinc-800 rounded-[2.5rem] flex justify-between w-full shadow-inner uppercase font-black text-center text-center">
-                        <div><p class="text-zinc-500 text-[10px] mb-1 italic text-center">Pontos</p><h4 class="text-xl italic text-orange-500 text-center">${userData.points || 0}</h4></div>
-                        <div><p class="text-zinc-500 text-[10px] mb-1 italic text-center">Treinos</p><h4 class="text-xl italic text-white text-center">${userData.totalCheckins || 0}</h4></div>
+                    <div class="p-6 bg-zinc-900/30 border border-zinc-800 rounded-[2.5rem] flex justify-between w-full shadow-inner uppercase font-black text-center text-center text-center">
+                        <div><p class="text-zinc-500 text-[10px] mb-1 italic text-center text-center text-center">Pontos</p><h4 class="text-xl italic text-orange-500 text-center text-center text-center">${userData.points || 0}</h4></div>
+                        <div><p class="text-zinc-500 text-[10px] mb-1 italic text-center text-center text-center">Treinos</p><h4 class="text-xl italic text-white text-center text-center text-center">${userData.totalCheckins || 0}</h4></div>
                     </div>
                 </div>`;
         }
-
-        function renderOnboarding() {
-            const content = document.getElementById('app-content');
-            window.obData = { freq: 3, plan: 'Pryme' };
-            content.innerHTML = `<div class="animate-fade-in flex flex-col min-h-full py-6 text-white italic uppercase tracking-tighter text-center text-center text-center"><h2 class="text-4xl font-black mb-12 uppercase italic tracking-tighter text-white text-center text-center">Novo Perfil</h2><div class="space-y-6 flex-1 text-white italic uppercase font-black text-center text-center"><input type="text" id="ob-name" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic uppercase font-black text-center text-center" placeholder="NOME COMPLETO"><div class="grid grid-cols-2 gap-4 text-white text-center text-center text-center"><input type="number" id="ob-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic uppercase font-black text-center text-center" placeholder="PESO (KG)"><input type="number" id="ob-height" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic uppercase font-black text-center text-center" placeholder="ALTURA (CM)"></div><div class="space-y-3 italic text-center text-center text-center text-center"><p class="text-zinc-500 text-[10px] font-black uppercase ml-2 italic tracking-widest text-center text-center text-center">TREINOS/SEMANA</p><div class="flex gap-2 text-white text-center text-center text-center">${[3, 4, 5].map(f => `<button onclick="setObFreq(${f})" class="ob-freq flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl p-4 font-black transition-all ${f === 3 ? 'border-orange-500 bg-orange-500/10' : ''}" data-val="${f}">${f}X</button>`).join('')}</div></div><div class="italic text-center text-center text-center text-center text-center"><p class="text-zinc-500 text-[10px] font-black uppercase ml-2 mb-3 italic tracking-widest text-center text-center">PLANO</p><div class="space-y-2 italic text-white text-left text-center text-center">${[{id: 'Pryme', pts: 15},{id: 'Wellhub', pts: 4},{id: 'Visitante', pts: 3}].map(p => `<button onclick="setObPlan('${p.id}')" class="ob-plan w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 flex justify-between items-center transition-all ${p.id === 'Pryme' ? 'border-orange-500 bg-orange-500/10' : ''}" data-val="${p.id}"><span class="font-bold text-white uppercase text-xs tracking-widest italic text-center text-center">${p.id} Member</span><span class="text-[10px] font-black uppercase text-orange-500 italic tracking-tighter text-right text-center">+${p.pts} pts/tr</span></button>`).join('')}</div></div></div><button onclick="submitOnboarding()" class="w-full bg-orange-500 text-black p-6 rounded-[2.5rem] font-black uppercase italic mt-10 active:scale-95 transition-all shadow-xl shadow-orange-500/40 text-center text-center text-center text-center">Concluir</button></div>`;
-            lucide.createIcons();
-        }
-
-        window.handleCheckin = async () => {
-            const today = getLocalDateString();
-            if (userData.lastCheckin === today) { showToast("Check-in já feito.", true); return; }
-            const checkinBtn = document.getElementById('btn-checkin');
-            const originalHTML = checkinBtn.innerHTML;
-            const unlock = (msg, err = true) => { checkinBtn.innerHTML = originalHTML; checkinBtn.disabled = false; if(msg) showToast(msg, err); };
-            checkinBtn.innerHTML = `<div class="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin"></div>`;
-            checkinBtn.disabled = true;
-            const safety = setTimeout(() => unlock("GPS demorou!"), 12000);
-            navigator.geolocation.getCurrentPosition(async (pos) => {
-                clearTimeout(safety);
-                const dist = calculateDistance(pos.coords.latitude, pos.coords.longitude, GYM_LAT, GYM_LON);
-                if (dist > Math.max(MAX_DISTANCE_METERS, pos.coords.accuracy || 100)) return unlock(`Distância: ${Math.round(dist)}m. Vá à Pryme!`);
-                const yesterdayStr = getLocalDateString(new Date(new Date().setDate(new Date().getDate()-1)));
-                let pts = userData.plan === 'Pryme' ? 15 : (userData.plan === 'Wellhub' ? 4 : 3);
-                const updates = { lastCheckin: today, totalCheckins: (userData.totalCheckins || 0) + 1, points: (userData.points || 0) + pts, streak: (userData.lastCheckin === yesterdayStr ? (userData.streak || 0) + 1 : 1), history: arrayUnion(today) };
-                if(await saveUserData(updates)) { showCheckinOverlay(); renderApp(); } else { unlock("Erro ao salvar."); }
-            }, () => { clearTimeout(safety); unlock("Sinal GPS fraco!"); }, { enableHighAccuracy: true, timeout: 8000 });
-        };
-
-        window.handlePurchase = async (i, c) => { if(userData.points >= c) { await saveUserData({ points: userData.points - c }); showToast("Resgatado!"); renderApp(); } };
-        window.saveWorkout = async () => {
-            const fields = document.querySelectorAll('.workout-field'); const plan = {};
-            fields.forEach(f => { plan[f.dataset.key] = f.value; });
-            try { await updateDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid), { workoutPlan: plan }); userData.workoutPlan = plan; showToast("Salvo!"); } catch (e) { showToast("Erro.", true); }
-        };
 
         window.openModal = async (type, keepOpen = false) => {
             const ov = document.getElementById('modal-overlay'); const t = document.getElementById('modal-title'); const c = document.getElementById('modal-content');
             if (!keepOpen) ov.classList.remove('hidden');
             if(type === 'ranking') {
                 t.innerText = "Ranking Academia";
-                c.innerHTML = `<div class="flex border-b border-zinc-900 mb-6 text-center text-center text-center"><button onclick="switchRankingMode('monthly')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'monthly' ? 'ranking-tab-active' : 'text-zinc-600'}">Mensal</button><button onclick="switchRankingMode('total')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'total' ? 'ranking-tab-active' : 'text-zinc-600'}">Geral</button></div><div id="ranking-list" class="space-y-3 text-center text-center text-center"><div class="text-center py-10"><div class="animate-spin h-6 w-6 border-2 border-orange-500 border-t-transparent rounded-full mx-auto"></div></div></div>`;
+                c.innerHTML = `<div class="flex border-b border-zinc-900 mb-6 text-center text-center text-center text-center"><button onclick="switchRankingMode('monthly')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'monthly' ? 'ranking-tab-active' : 'text-zinc-600'} text-center">Mensal</button><button onclick="switchRankingMode('total')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'total' ? 'ranking-tab-active' : 'text-zinc-600'} text-center">Geral</button></div><div id="ranking-list" class="space-y-3 text-center text-center"><div class="text-center py-10"><div class="animate-spin h-6 w-6 border-2 border-orange-500 border-t-transparent rounded-full mx-auto"></div></div></div>`;
                 const snap = await getDocs(query(collection(db, 'artifacts', appId, 'public', 'data', 'users')));
                 const curMonth = getLocalDateString().substring(0, 7);
                 let list = snap.docs.map(d => { const data = d.data(); return { ...data, monthly: (Array.isArray(data.history) ? data.history : []).filter(d => d.startsWith(curMonth)).length }; });
                 list = rankingMode === 'monthly' ? list.sort((a,b) => b.monthly - a.monthly) : list.sort((a,b) => (b.totalCheckins || 0) - (a.totalCheckins || 0));
-                document.getElementById('ranking-list').innerHTML = list.slice(0, 10).map((u, i) => `<div class="flex items-center justify-between bg-zinc-900/50 p-4 rounded-3xl border border-zinc-800 animate-fade-in text-center text-center"><div class="flex items-center gap-3 text-center text-center"><span class="text-orange-500 font-black italic w-4 text-center">${i+1}</span><div class="w-10 h-10 rounded-xl bg-zinc-800 overflow-hidden text-center"><img src="${u.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.uid}`}" class="w-full h-full object-cover"></div><p class="font-bold text-sm text-white uppercase italic tracking-tighter text-center text-center">${esc(u.name ? u.name.split(' ')[0] : 'Atleta')}</p></div><p class="font-black text-white italic tracking-tighter text-xs text-center">${rankingMode === 'monthly' ? u.monthly : (u.totalCheckins || 0)} TR</p></div>`).join('');
+                document.getElementById('ranking-list').innerHTML = list.slice(0, 10).map((u, i) => `<div class="flex items-center justify-between bg-zinc-900/50 p-4 rounded-3xl border border-zinc-800 animate-fade-in text-center text-center text-center text-center"><div class="flex items-center gap-3 text-center text-center text-center text-center"><span class="text-orange-500 font-black italic w-4 text-center text-center text-center">${i+1}</span><div class="w-10 h-10 rounded-xl bg-zinc-800 overflow-hidden text-center text-center text-center text-center"><img src="${u.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.uid}`}" class="w-full h-full object-cover text-center text-center"></div><p class="font-bold text-sm text-white uppercase italic tracking-tighter text-center text-center text-center">${esc(u.name ? u.name.split(' ')[0] : 'Atleta')}</p></div><p class="font-black text-white italic tracking-tighter text-xs text-center text-center text-center">${rankingMode === 'monthly' ? u.monthly : (u.totalCheckins || 0)} TR</p></div>`).join('');
             }
             if(type === 'notes') {
                 t.innerText = "Suas Anotações";
-                c.innerHTML = `<textarea id="user-notes" class="w-full h-48 bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white text-sm italic font-bold placeholder-zinc-600 focus:border-orange-500 transition-colors" placeholder="ANOTE SEUS RECORDES, DIETA OU METAS...">${userData.notes || ''}</textarea><button onclick="saveNotes()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center">Salvar Notas</button>`;
+                c.innerHTML = `<textarea id="user-notes" class="w-full h-48 bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white text-sm italic font-bold placeholder-zinc-600 focus:border-orange-500 transition-colors text-center" placeholder="ANOTE SEUS RECORDES, DIETA OU METAS...">${userData.notes || ''}</textarea><button onclick="saveNotes()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center">Salvar Notas</button>`;
             }
             if(type === 'achievements') {
                 t.innerText = "Conquistas";
-                c.innerHTML = `<div class="grid grid-cols-2 gap-4 italic uppercase text-center text-center text-center">${Object.keys(achievementInfo).map(ach => { const has = (userData.titles || []).includes(ach); return `<div onclick="window.showAchievementDetails('${ach}')" class="p-4 rounded-2xl border ${has ? 'border-orange-500 bg-orange-500/10 shadow-lg' : 'border-zinc-800 bg-zinc-900/50 opacity-50'} text-center cursor-pointer active:scale-95 transition-all text-white"><i data-lucide="award" class="mx-auto mb-2 ${has ? 'text-orange-500' : 'text-zinc-600'} text-center"></i><p class="font-bold text-[10px] tracking-widest text-center">${ach}</p></div>`; }).join('')}</div>`;
+                c.innerHTML = `<div class="grid grid-cols-2 gap-4 italic uppercase text-center text-center text-center">${Object.keys(achievementInfo).map(ach => { const has = (userData.titles || []).includes(ach); return `<div onclick="window.showAchievementDetails('${ach}')" class="p-4 rounded-2xl border ${has ? 'border-orange-500 bg-orange-500/10 shadow-lg' : 'border-zinc-900 bg-zinc-900/50 opacity-50'} text-center cursor-pointer active:scale-95 transition-all text-white text-center text-center"><i data-lucide="award" class="mx-auto mb-2 ${has ? 'text-orange-500' : 'text-zinc-600'} text-center"></i><p class="font-bold text-[10px] tracking-widest text-center text-center">${ach}</p></div>`; }).join('')}</div>`;
             }
             if(type === 'calendar') {
                 t.innerText = "Vista Anual";
                 const historySet = new Set(Array.isArray(userData.history) ? userData.history : []);
                 const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-                c.innerHTML = `<div class="space-y-4 text-white italic border-t border-zinc-900 pt-4 text-center text-center">${months.map((m, i) => { const days = new Date(new Date().getFullYear(), i + 1, 0).getDate(); return `<div class="bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50 text-center"><h4 class="text-[10px] font-black uppercase text-zinc-500 mb-2 italic tracking-widest text-center">${m}</h4><div class="grid grid-cols-7 gap-1 text-center text-center">${Array.from({length: days}).map((_, d) => { const ds = new Date().getFullYear() + "-" + String(i+1).padStart(2,'0') + "-" + String(d+1).padStart(2,'0'); return `<div class="aspect-square rounded-sm ${historySet.has(ds) ? 'bg-orange-500' : 'bg-zinc-800/40'} text-center text-center"></div>`; }).join('')}</div></div>`; }).join('')}</div>`;
+                c.innerHTML = `<div class="space-y-4 text-white italic border-t border-zinc-900 pt-4 text-center text-center">${months.map((m, i) => { const days = new Date(new Date().getFullYear(), i + 1, 0).getDate(); return `<div class="bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50 text-center"><h4 class="text-[10px] font-black uppercase text-zinc-500 mb-2 italic tracking-widest text-center text-center">${m}</h4><div class="grid grid-cols-7 gap-1 text-center text-center text-center text-center text-center">${Array.from({length: days}).map((_, d) => { const ds = new Date().getFullYear() + "-" + String(i+1).padStart(2,'0') + "-" + String(d+1).padStart(2,'0'); return `<div class="aspect-square rounded-sm ${historySet.has(ds) ? 'bg-orange-500' : 'bg-zinc-800/40'} text-center text-center text-center text-center"></div>`; }).join('')}</div></div>`; }).join('')}</div>`;
             }
             if(type === 'auth_error_help') {
                 t.innerText = "Erro Google Auth";
-                c.innerHTML = `<div class="space-y-4 text-zinc-400 text-sm italic text-left text-center"><p class="text-white font-bold">Domínio Não Autorizado!</p><p>Vá no Console do Firebase > Authentication > Settings > Authorized Domains.</p><p class="bg-zinc-900 p-3 rounded-xl border border-zinc-800 text-orange-500 break-all select-all">${window.location.hostname}</p><p>Adicione o link acima na lista para liberar o login.</p></div>`;
+                c.innerHTML = `<div class="space-y-4 text-zinc-400 text-sm italic text-left text-center text-center text-center"><p class="text-white font-bold text-center text-center">Domínio Não Autorizado!</p><p class="text-center text-center text-center">Vá no Console do Firebase > Authentication > Settings > Authorized Domains.</p><p class="bg-zinc-900 p-3 rounded-xl border border-zinc-800 text-orange-500 break-all select-all text-center text-center">${window.location.hostname}</p><p class="text-center text-center text-center">Adicione o link acima na lista para liberar o login.</p></div>`;
             }
-            if(type === 'weight') { t.innerText = "Peso"; c.innerHTML = `<input type="number" id="new-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-center text-3xl font-black text-white italic uppercase text-center" value="${userData.weight}"><button onclick="saveUserData({weight: parseFloat(document.getElementById('new-weight').value)}).then(()=>{closeModal();renderApp();})" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center">Salvar</button>`; }
-            if(type === 'confirm_delete') { t.innerText = "Eliminar?"; c.innerHTML = `<div class="space-y-6 text-center italic text-center text-center"><p class="text-sm font-bold uppercase text-center text-center text-center">Apagar perfil e pontos?</p><div class="flex flex-col gap-3 mt-8 text-center text-center"><button onclick="confirmAccountDeletion()" class="w-full bg-red-500 text-white p-5 rounded-3xl font-black uppercase italic shadow-xl active:scale-95 text-center text-center text-center">Sim, Eliminar</button><button onclick="closeModal()" class="w-full bg-zinc-900 text-zinc-500 p-5 rounded-3xl font-black uppercase italic active:scale-95 text-center text-center text-center">Cancelar</button></div></div>`; }
-            if(type === 'pryme_upsell') { t.innerText = "Membro Pryme"; c.innerHTML = `<div class="space-y-6 text-zinc-300 italic uppercase font-black text-center text-center"><div class="p-6 bg-gradient-to-br from-zinc-900 to-black border border-zinc-800 rounded-[2.5rem] italic text-white text-center text-center text-center text-center"><ul class="space-y-4"><li class="flex items-start gap-3 text-center text-center"><i data-lucide="zap" class="text-orange-500 w-5 h-5 mt-1 text-center text-center"></i><div><p class="font-bold text-sm text-white uppercase tracking-tighter text-center text-center">15 Pontos por Treino</p><p class="text-xs text-zinc-400 text-center text-center text-center">Pontue 5x mais rápido.</p></div></li><li class="flex items-start gap-3 text-center text-center text-center text-center"><i data-lucide="award" class="text-orange-500 w-5 h-5 mt-1 text-center text-center"></i><div><p class="font-bold text-sm text-white uppercase tracking-tighter text-center text-center text-center">Status Elite</p><p class="text-xs text-zinc-400 text-center text-center text-center">Exclusivo para oficiais.</p></div></li></ul></div><button onclick="showToast('Vá até a recepção!')" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase italic active:scale-95 transition-all shadow-xl text-center text-center">Falar com Consultor</button></div>`; }
+            if(type === 'weight') { t.innerText = "Peso"; c.innerHTML = `<input type="number" id="new-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-center text-3xl font-black text-white italic uppercase text-center text-center text-center" value="${userData.weight}"><button onclick="saveUserData({weight: parseFloat(document.getElementById('new-weight').value)}).then(()=>{closeModal();renderApp();})" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center text-center text-center">Salvar</button>`; }
+            if(type === 'confirm_delete') { t.innerText = "Eliminar?"; c.innerHTML = `<div class="space-y-6 text-center italic text-center text-center text-center text-center text-center"><p class="text-sm font-bold uppercase text-center text-center text-center text-center">Apagar perfil e pontos?</p><div class="flex flex-col gap-3 mt-8 text-center text-center text-center text-center text-center text-center"><button onclick="confirmAccountDeletion()" class="w-full bg-red-500 text-white p-5 rounded-3xl font-black uppercase italic shadow-xl active:scale-95 text-center text-center text-center text-center">Sim, Eliminar</button><button onclick="closeModal()" class="w-full bg-zinc-900 text-zinc-500 p-5 rounded-3xl font-black uppercase italic active:scale-95 text-center text-center text-center text-center text-center text-center text-center">Cancelar</button></div></div>`; }
+            if(type === 'pryme_upsell') { t.innerText = "Membro Pryme"; c.innerHTML = `<div class="space-y-6 text-zinc-300 italic uppercase font-black text-center text-center text-center text-center text-center text-center"><div class="p-6 bg-gradient-to-br from-zinc-900 to-black border border-zinc-800 rounded-[2.5rem] italic text-white text-center text-center text-center text-center text-center text-center"><ul class="space-y-4"><li class="flex items-start gap-3 text-center text-center text-center text-center text-center text-center text-center"><i data-lucide="zap" class="text-orange-500 w-5 h-5 mt-1 text-center text-center text-center"></i><div><p class="font-bold text-sm text-white uppercase tracking-tighter text-center text-center text-center">15 Pontos por Treino</p><p class="text-xs text-zinc-400 text-center text-center text-center text-center text-center">Pontue 5x mais rápido.</p></div></li><li class="flex items-start gap-3 text-center text-center text-center text-center text-center text-center text-center text-center"><i data-lucide="award" class="text-orange-500 w-5 h-5 mt-1 text-center text-center text-center"></i><div><p class="font-bold text-sm text-white uppercase tracking-tighter text-center text-center text-center text-center">Status Elite</p><p class="text-xs text-zinc-400 text-center text-center text-center text-center text-center text-center">Exclusivo para oficiais.</p></div></li></ul></div><button onclick="showToast('Vá até a recepção!')" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase italic active:scale-95 transition-all shadow-xl text-center text-center text-center text-center text-center text-center">Falar com Consultor</button></div>`; }
             lucide.createIcons();
         };
 
@@ -572,18 +521,17 @@
             const progress = Math.min(100, ((userData.totalCheckins || 0) / data.req) * 100);
             const ov = document.getElementById('modal-overlay'); const t = document.getElementById('modal-title'); const c = document.getElementById('modal-content');
             t.innerText = ach;
-            c.innerHTML = `<div class="space-y-6 flex flex-col items-center py-4 text-white italic uppercase font-black text-center text-center text-center"><div class="w-24 h-24 rounded-[2rem] flex items-center justify-center ${ (userData.titles || []).includes(ach) ? 'bg-orange-500 text-black shadow-lg shadow-orange-500/20' : 'bg-zinc-900 text-zinc-700 opacity-40'} text-center text-center text-center text-center"><i data-lucide="award" class="w-12 h-12 text-center text-center text-center text-center"></i></div><div class="text-center px-4 text-center text-center text-center text-center"><p class="text-zinc-200 font-semibold mb-2 uppercase text-xs tracking-widest underline decoration-orange-500 underline-offset-4 decoration-2 text-center text-center text-center text-center">${esc(data.desc)}</p><p class="text-[10px] font-black uppercase tracking-[0.2em] text-orange-500 mt-4 italic text-center text-center text-center text-center text-center text-center">Meta: ${data.req} Treinos</p></div><div class="w-full space-y-2 px-4 text-center text-center text-center text-center text-center text-center"><div class="flex justify-between text-[8px] font-black uppercase text-zinc-500 tracking-tighter text-center"><span>Progresso</span><span>${userData.totalCheckins || 0} / ${data.req}</span></div><div class="w-full bg-zinc-900 h-2 rounded-full overflow-hidden border border-zinc-800 shadow-inner text-center text-center text-center"><div class="bg-orange-500 h-full transition-all duration-700 shadow-[0_0_10px_rgba(249,115,22,0.4)]" style="width: ${progress}%"></div></div></div></div>`;
+            c.innerHTML = `<div class="space-y-6 flex flex-col items-center py-4 text-white italic uppercase font-black text-center text-center text-center text-center text-center text-center text-center text-center text-center"><div class="w-24 h-24 rounded-[2rem] flex items-center justify-center ${ (userData.titles || []).includes(ach) ? 'bg-orange-500 text-black shadow-lg shadow-orange-500/20' : 'bg-zinc-900 text-zinc-700 opacity-40'} text-center text-center text-center text-center text-center text-center text-center text-center text-center"><i data-lucide="award" class="w-12 h-12 text-center text-center text-center text-center text-center text-center text-center text-center text-center"></i></div><div class="text-center px-4 text-center text-center text-center text-center text-center text-center text-center text-center text-center"><p class="text-zinc-200 font-semibold mb-2 uppercase text-xs tracking-widest underline decoration-orange-500 underline-offset-4 decoration-2 text-center text-center text-center text-center text-center text-center text-center text-center text-center">${esc(data.desc)}</p><p class="text-[10px] font-black uppercase tracking-[0.2em] text-orange-500 mt-4 italic text-center text-center text-center text-center text-center text-center text-center text-center text-center">Meta: ${data.req} Treinos</p></div><div class="w-full space-y-2 px-4 text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center"><div class="flex justify-between text-[8px] font-black uppercase text-zinc-500 tracking-tighter text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center"><span>Progresso</span><span>${userData.totalCheckins || 0} / ${data.req}</span></div><div class="w-full bg-zinc-900 h-2 rounded-full overflow-hidden border border-zinc-800 shadow-inner text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center"><div class="bg-orange-500 h-full transition-all duration-700 shadow-[0_0_10px_rgba(249,115,22,0.4)] text-center text-center text-center text-center text-center text-center text-center" style="width: ${progress}%"></div></div></div></div>`;
             ov.classList.remove('hidden'); lucide.createIcons();
         };
 
         window.closeModal = () => document.getElementById('modal-overlay').classList.add('hidden');
-        window.showToast = (m, e) => { const tc = document.getElementById('toast-container'); const t = document.createElement('div'); t.className = `p-4 rounded-full px-8 font-black uppercase text-[10px] shadow-2xl animate-fade-in ${e ? 'bg-red-500 text-white shadow-red-500/20' : 'bg-orange-500 text-black shadow-orange-500/20'}`; t.innerText = m; tc.appendChild(t); setTimeout(() => t.remove(), 3000); };
-        window.handleLogout = () => signOut(auth).then(() => location.reload());
+        window.showToast = (m, e) => { const tc = document.getElementById('toast-container'); const t = document.createElement('div'); t.className = `p-4 rounded-full px-8 font-black uppercase text-[10px] shadow-2xl animate-fade-in ${e ? 'bg-red-50 text-white shadow-red-500/20' : 'bg-orange-500 text-black shadow-orange-500/20'}`; t.innerText = m; tc.appendChild(t); setTimeout(() => t.remove(), 3000); };
 
         function showCheckinOverlay() {
             const ov = document.createElement('div');
-            ov.className = "fixed inset-0 z-[100] bg-orange-500 flex flex-col items-center justify-center animate-fade-in p-8 text-center text-black italic text-center text-center text-center";
-            ov.innerHTML = `<i data-lucide="zap" class="w-24 h-24 mb-6 animate-bounce text-black text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center"></i><h2 class="text-6xl font-black uppercase italic tracking-tighter leading-tight text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center">Treino <br>Pago!</h2><button onclick="this.parentElement.remove()" class="mt-12 bg-black text-white px-12 py-6 rounded-full font-black uppercase text-xs active:scale-95 transition-all tracking-widest italic font-bold text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center">Foco Total</button>`;
+            ov.className = "fixed inset-0 z-[100] bg-orange-500 flex flex-col items-center justify-center animate-fade-in p-8 text-center text-black italic text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center";
+            ov.innerHTML = `<i data-lucide="zap" class="w-24 h-24 mb-6 animate-bounce text-black text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center"></i><h2 class="text-6xl font-black uppercase italic tracking-tighter leading-tight text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center">Treino <br>Pago!</h2><button onclick="this.parentElement.remove()" class="mt-12 bg-black text-white px-12 py-6 rounded-full font-black uppercase text-xs active:scale-95 transition-all tracking-widest italic font-bold text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center text-center">Foco Total</button>`;
             document.body.appendChild(ov); lucide.createIcons();
         }
     </script>
