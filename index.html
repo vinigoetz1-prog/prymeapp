@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pryme Fitness 11.7</title>
+    <title>Pryme Fitness 11.9 - FOTO FIX</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -30,7 +30,6 @@
         #toast-container { z-index: 300; }
         .ranking-tab-active { border-bottom: 3px solid #F97316; color: #ffffff; }
 
-        /* Estilo do Banner de Upgrade */
         .upgrade-banner {
             background: linear-gradient(90deg, rgba(249, 115, 22, 0.15) 0%, rgba(5, 5, 5, 0) 100%);
             border-left: 4px solid #F97316;
@@ -45,20 +44,20 @@
         <div class="w-12 h-1 bg-zinc-800 rounded-full overflow-hidden">
             <div class="bg-orange-500 h-full w-1/2 animate-[progress_1.5s_infinite] origin-left"></div>
         </div>
-        <p id="loading-text" class="mt-6 text-zinc-500 font-bold tracking-widest text-[10px] uppercase italic text-center">Pryme Academy</p>
+        <p id="loading-text" class="mt-6 text-zinc-500 font-bold tracking-widest text-[10px] uppercase italic text-center">Iniciando Ecossistema</p>
     </div>
 
     <!-- Auth Screen -->
-    <div id="auth-screen" class="fixed inset-0 z-[90] bg-[#050505] flex flex-col p-8 hidden overflow-y-auto text-center">
+    <div id="auth-screen" class="fixed inset-0 z-[90] bg-[#050505] flex flex-col p-8 hidden overflow-y-auto">
         <div class="flex flex-col items-center mt-16 mb-12">
             <img src="logo.png" alt="Pryme" class="logo-main mb-2" onerror="this.style.display='none'">
-            <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-[0.4em] italic text-center text-center">Elite Fitness Ecosystem</p>
+            <p class="text-zinc-500 text-[10px] uppercase font-bold tracking-[0.4em] italic text-center">Elite Fitness Ecosystem</p>
         </div>
-        <div id="auth-container" class="space-y-6 animate-fade-in text-center"></div>
+        <div id="auth-container" class="space-y-6 animate-fade-in"></div>
     </div>
 
     <!-- Main Container -->
-    <div id="main-container" class="h-screen w-full flex flex-col hidden overflow-hidden relative">
+    <div id="main-container" class="h-screen w-full flex flex-col hidden overflow-hidden relative text-center">
         <header class="p-6 flex justify-between items-center z-40 bg-[#050505]/95 border-b border-white/5">
             <img src="logo.png" alt="Pryme" class="logo-header" onerror="this.outerHTML='<div class=\'logo-placeholder\'>P</div>'">
             <div class="flex items-center gap-4">
@@ -81,18 +80,19 @@
             <button onclick="navigate('profile')" id="nav-profile" class="flex flex-col items-center gap-1 text-zinc-500 transition-all"><i data-lucide="user"></i><span class="text-[9px] font-black uppercase italic">Perfil</span></button>
         </nav>
 
+        <!-- Side Drawer -->
         <div id="side-drawer" class="fixed inset-0 pointer-events-none">
             <div id="drawer-overlay" class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300" onclick="toggleSideMenu()"></div>
             <div id="drawer-content" class="absolute right-0 top-0 bottom-0 w-72 bg-zinc-950 border-l border-white/5 translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-                <div class="p-6 flex justify-between items-center border-b border-zinc-900 italic uppercase text-center text-center">
-                    <h2 class="text-xl font-black italic">Menu</h2>
+                <div class="p-6 flex justify-between items-center border-b border-zinc-900">
+                    <h2 class="text-xl font-black italic uppercase">Menu</h2>
                     <button onclick="toggleSideMenu()" class="p-2 bg-zinc-900 rounded-xl"><i data-lucide="x" class="w-5 h-5"></i></button>
                 </div>
-                <div class="flex-1 p-4 space-y-3 uppercase text-[10px] font-black italic text-center">
-                    <button onclick="toggleSideMenu(); openModal('achievements')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800"><i data-lucide="award" class="text-orange-500"></i>Conquistas</button>
-                    <button onclick="toggleSideMenu(); openModal('ranking')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800"><i data-lucide="trending-up" class="text-orange-500"></i>Ranking Academia</button>
-                    <button onclick="toggleSideMenu(); openModal('calendar')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800"><i data-lucide="calendar" class="text-orange-500"></i>Vista Anual</button>
-                    <button onclick="toggleSideMenu(); openModal('notes')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800"><i data-lucide="sticky-note" class="text-orange-500"></i>Anotações</button>
+                <div class="flex-1 p-4 space-y-3 uppercase text-[10px] font-black italic text-center text-center">
+                    <button onclick="toggleSideMenu(); openModal('achievements')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-center"><i data-lucide="award" class="text-orange-500 text-center"></i>Conquistas</button>
+                    <button onclick="toggleSideMenu(); openModal('ranking')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-center"><i data-lucide="trending-up" class="text-orange-500 text-center"></i>Ranking Academia</button>
+                    <button onclick="toggleSideMenu(); openModal('calendar')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-center"><i data-lucide="calendar" class="text-orange-500 text-center"></i>Vista Anual</button>
+                    <button onclick="toggleSideMenu(); openModal('notes')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-center"><i data-lucide="sticky-note" class="text-orange-500 text-center"></i>Anotações</button>
                 </div>
                 <div class="p-6 border-t border-zinc-900 space-y-2">
                     <button onclick="handleLogout()" class="w-full p-4 rounded-3xl bg-zinc-900 text-zinc-500 font-bold border border-zinc-800 uppercase text-[10px] italic active:scale-95 transition-all text-center">Sair da Conta</button>
@@ -103,14 +103,14 @@
     </div>
 
     <!-- Modais -->
-    <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 flex flex-col gap-2 pointer-events-none w-full max-w-[90%] items-center"></div>
-    <div id="modal-overlay" class="fixed inset-0 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4 text-center">
-        <div id="modal-box" class="w-full max-w-md bg-zinc-950 rounded-[2.5rem] border border-zinc-800 overflow-hidden flex flex-col max-h-[85vh]">
-            <div class="p-6 flex justify-between items-center border-b border-zinc-900 italic uppercase text-center">
+    <div id="toast-container" class="fixed top-8 left-1/2 -translate-x-1/2 flex flex-col gap-2 pointer-events-none w-full max-w-[90%] items-center text-center"></div>
+    <div id="modal-overlay" class="fixed inset-0 bg-black/95 backdrop-blur-md hidden flex items-center justify-center p-4">
+        <div id="modal-box" class="w-full max-w-md bg-zinc-950 rounded-[2.5rem] border border-zinc-800 overflow-hidden flex flex-col max-h-[85vh] text-center">
+            <div class="p-6 flex justify-between items-center border-b border-zinc-900 italic uppercase">
                 <h3 id="modal-title" class="text-xl font-black text-center text-center">Modal</h3>
-                <button onclick="closeModal()" class="p-2 bg-zinc-900 rounded-xl text-center"><i data-lucide="x" class="w-5 h-5 text-center text-center"></i></button>
+                <button onclick="closeModal()" class="p-2 bg-zinc-900 rounded-xl text-center"><i data-lucide="x" class="w-5 h-5 text-center"></i></button>
             </div>
-            <div id="modal-content" class="p-6 overflow-y-auto text-center text-center text-center"></div>
+            <div id="modal-content" class="p-6 overflow-y-auto text-center"></div>
         </div>
     </div>
 
@@ -145,8 +145,10 @@
         const GYM_LON = -51.17387061571298; 
         const MAX_DISTANCE_METERS = 50;
 
-        // --- UTILS ---
+        // --- GLOBAL UTILS ---
+        // Definida como função tradicional para evitar ReferenceError durante hoisting
         function esc(s = "") { return String(s).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;"); }
+        window.esc = esc;
         window.getLocalDateString = () => new Date().toISOString().split('T')[0];
 
         function calculateDistance(lat1, lon1, lat2, lon2) {
@@ -203,7 +205,7 @@
         onAuthStateChanged(auth, async (u) => {
             user = u;
             if (user) {
-                document.getElementById('loading-text').innerText = "A carregar perfil...";
+                document.getElementById('loading-text').innerText = "Carregando Perfil...";
                 await syncUserData();
             } else {
                 try { await getRedirectResult(auth); } catch (e) {}
@@ -234,7 +236,9 @@
                 }
             } catch (e) {
                 console.error(e);
-                showToast(`ERRO FIREBASE: ${e.code}`, true);
+                showToast(`ERRO FIREBASE: ${e.code}. Verifique as Rules!`, true);
+                renderAuthUI();
+                showScreen('auth-screen');
             }
         }
 
@@ -285,7 +289,7 @@
             }, () => {
                 clearTimeout(safety);
                 btn.innerHTML = originalHTML; btn.disabled = false;
-                showToast("GPS negado ou sinal fraco!", true);
+                showToast("Sinal de GPS fraco ou negado!", true);
             }, { enableHighAccuracy: true, timeout: 8000 });
         };
 
@@ -310,7 +314,7 @@
             const n = document.getElementById('ob-name').value.trim();
             const w = parseFloat(document.getElementById('ob-weight').value);
             const h = parseFloat(document.getElementById('ob-height').value);
-            if(!n || isNaN(w) || isNaN(h)) return showToast("Preencha peso e altura!", true);
+            if(!n || isNaN(w) || isNaN(h)) return showToast("Preencha todos os dados!", true);
 
             const btn = document.getElementById('btn-submit-ob');
             btn.innerText = "Salvando..."; btn.disabled = true;
@@ -344,7 +348,7 @@
 
         window.saveNotes = async () => {
             const val = document.getElementById('user-notes').value;
-            if(await window.saveUserData({ notes: val })) { showToast("Anotado!"); closeModal(); }
+            if(await window.saveUserData({ notes: val })) { showToast("Notas salvas!"); closeModal(); }
         };
 
         window.saveWorkout = async () => {
@@ -365,16 +369,54 @@
             }
         };
 
+        // --- LÓGICA DE FOTO CORRIGIDA ---
+        window.triggerPhotoUpload = () => document.getElementById('photo-upload').click();
+        window.handlePhotoChange = async (event) => {
+            const file = event.target.files[0]; 
+            if (!file) return;
+
+            showToast("Otimizando foto...");
+
+            const reader = new FileReader();
+            reader.onload = (e) => {
+                const img = new Image();
+                img.onload = () => {
+                    const canvas = document.createElement('canvas');
+                    const size = 300; // Resolução final da foto do perfil
+                    canvas.width = size;
+                    canvas.height = size;
+                    const ctx = canvas.getContext('2d');
+
+                    // Lógica para cortar a imagem em um quadrado centralizado
+                    const minDim = Math.min(img.width, img.height);
+                    const sx = (img.width - minDim) / 2;
+                    const sy = (img.height - minDim) / 2;
+
+                    ctx.drawImage(img, sx, sy, minDim, minDim, 0, 0, size, size);
+
+                    const dataUrl = canvas.toDataURL('image/jpeg', 0.8);
+                    window.saveUserData({ photoURL: dataUrl }).then((success) => {
+                        if (success) {
+                            showToast("Foto atualizada!");
+                            renderApp(); // Atualiza a interface para mostrar a nova foto
+                        }
+                    });
+                };
+                img.src = e.target.result;
+            };
+            reader.readAsDataURL(file);
+        };
+
         // --- RENDER UI ---
         function getUpsellBannerHTML() {
             if (!userData || userData.plan === 'Pryme') return '';
             return `
-                <div class="animate-fade-in p-4 upgrade-banner rounded-2xl flex items-center justify-between gap-4 mb-6 cursor-pointer active:scale-95 transition-all" onclick="openModal('pryme_upsell')">
-                    <div class="flex items-center gap-3 text-left">
+                <div class="animate-fade-in p-4 upgrade-banner rounded-2xl flex items-center justify-between gap-4 mb-6 cursor-pointer active:scale-95 transition-all text-left" onclick="openModal('pryme_upsell')">
+                    <div class="flex items-center gap-3">
                         <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center"><i data-lucide="crown" class="text-black w-5 h-5"></i></div>
                         <div>
-                            <h4 class="font-black text-xs uppercase italic tracking-widest text-orange-500">Torne-se Pryme</h4>
-                            <p class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Ganhe 15 pts por treino (Wellhub ganha 4)</p>
+                            <h4 class="font-black text-xs uppercase italic tracking-widest text-orange-500">Membro Pryme?</h4>
+                            <p class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest">Wellhub ganha 4 pts, Pryme ganha 15!</p>
                         </div>
                     </div>
                     <i data-lucide="chevron-right" class="text-orange-500 w-4 h-4"></i>
@@ -391,10 +433,10 @@
                         <button onclick="handleLogin()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase active:scale-95 transition-all">Entrar</button>
                     ` : `
                         <input type="email" id="email" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm" placeholder="E-mail">
-                        <input type="password" id="password" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm" placeholder="Senha (mín. 6)">
-                        <button onclick="handleSignup()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase active:scale-95 transition-all text-center text-center text-center">Cadastrar</button>
+                        <input type="password" id="password" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm" placeholder="Escolha uma Senha">
+                        <button onclick="handleSignup()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase active:scale-95 transition-all text-center">Cadastrar</button>
                     `}
-                    <div class="flex items-center gap-4 my-4 opacity-30 text-center"><div class="h-[1px] bg-white flex-1 text-center"></div><span>OU</span><div class="h-[1px] bg-white flex-1 text-center"></div></div>
+                    <div class="flex items-center gap-4 my-4 opacity-30 text-center text-center"><div class="h-[1px] bg-white flex-1"></div><span>OU</span><div class="h-[1px] bg-white flex-1 text-center"></div></div>
                     <button onclick="handleGoogleLogin()" class="w-full bg-white text-black p-5 rounded-3xl font-black uppercase flex items-center justify-center gap-3 active:scale-95 transition-all italic text-center">
                         <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
                         Login com Google
@@ -423,8 +465,8 @@
                             </div>
                         </div>
 
-                        <div class="space-y-3 text-left text-center">
-                            <p class="text-zinc-500 text-[10px] font-black ml-2 text-left">Seu Plano</p>
+                        <div class="space-y-3 text-left">
+                            <p class="text-zinc-500 text-[10px] font-black ml-2 text-left">Teu Plano</p>
                             <div class="space-y-2 text-center">
                                 ${[{id:'Pryme', pts:15},{id:'Wellhub', pts:4},{id:'Visitante', pts:3}].map(p => `
                                     <button onclick="setObPlan('${p.id}')" class="ob-plan w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 flex justify-between items-center transition-all ${p.id==='Pryme'?'border-orange-500 bg-orange-500/10':''}" data-val="${p.id}">
@@ -435,7 +477,7 @@
                             </div>
                         </div>
 
-                        <button id="btn-submit-ob" onclick="submitOnboarding()" class="w-full bg-orange-500 text-black p-6 rounded-[2.5rem] font-black mt-6 shadow-xl active:scale-95 transition-all uppercase text-center">CONCLUIR CADASTRO</button>
+                        <button id="btn-submit-ob" onclick="submitOnboarding()" class="w-full bg-orange-500 text-black p-6 rounded-[2.5rem] font-black mt-6 shadow-xl active:scale-95 transition-all">CONCLUIR CADASTRO</button>
                     </div>
                 </div>`;
             lucide.createIcons();
@@ -463,21 +505,21 @@
 
         function renderDashboard(container) {
             container.innerHTML = `
-                <div class="animate-fade-in space-y-6 italic">
+                <div class="animate-fade-in space-y-6 italic text-center">
                     ${getUpsellBannerHTML()}
-                    <div class="p-8 bg-zinc-900/50 border border-zinc-800 rounded-[3rem] flex flex-col items-center">
-                        <p class="text-zinc-500 text-[10px] font-black mb-2 uppercase text-center">Meta Batida</p>
-                        <h4 class="text-3xl font-black mb-6 uppercase italic underline decoration-orange-500 decoration-4 text-center">${userData.totalCheckins || 0} Treinos</h4>
-                        <button id="btn-checkin-action" onclick="handleCheckin()" class="w-44 h-44 rounded-full bg-pryme border-[8px] border-zinc-950 flex flex-col items-center justify-center gap-2 shadow-2xl active:scale-95 transition-all text-center">
-                            <i data-lucide="zap" class="text-black w-10 h-10"></i><span class="text-black font-black text-lg text-center">CHECK-IN</span>
+                    <div class="p-8 bg-zinc-900/50 border border-zinc-800 rounded-[3rem] flex flex-col items-center shadow-xl">
+                        <p class="text-zinc-500 text-[10px] font-black mb-2 uppercase text-center text-center">Meta Batida</p>
+                        <h4 class="text-3xl font-black mb-6 uppercase italic underline decoration-orange-500 decoration-4 text-center text-center">${userData.totalCheckins || 0} Treinos</h4>
+                        <button id="btn-checkin-action" onclick="handleCheckin()" class="w-44 h-44 rounded-full bg-pryme border-[8px] border-zinc-950 flex flex-col items-center justify-center gap-2 shadow-2xl active:scale-95 transition-all text-center text-center">
+                            <i data-lucide="zap" class="text-black w-10 h-10 text-center"></i><span class="text-black font-black text-lg text-center">CHECK-IN</span>
                         </button>
                     </div>
-                    <div class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between text-center">
+                    <div class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between text-center text-center">
                         <div class="flex items-center gap-4 text-center">
-                            <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center text-center"><i data-lucide="droplet" class="text-blue-500"></i></div>
-                            <div class="text-left text-white italic"><p class="text-[10px] font-black uppercase text-zinc-500">Hidratação</p><h4 class="text-xl font-black">${userData.waterML || 0} ML</h4></div>
+                            <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center text-center text-center"><i data-lucide="droplet" class="text-blue-500 text-center"></i></div>
+                            <div class="text-left text-white italic"><p class="text-[10px] font-black uppercase text-zinc-500 text-left">Hidratação</p><h4 class="text-xl font-black text-center">${userData.waterML || 0} ML</h4></div>
                         </div>
-                        <button onclick="addWater()" class="bg-zinc-800 text-blue-400 p-4 rounded-2xl active:scale-90 transition-all text-center"><i data-lucide="plus"></i></button>
+                        <button onclick="addWater()" class="bg-zinc-800 text-blue-400 p-4 rounded-2xl active:scale-90 transition-all text-center text-center"><i data-lucide="plus" class="text-center"></i></button>
                     </div>
                 </div>`;
         }
@@ -486,16 +528,16 @@
             const freq = userData.weeklyFreq || 3;
             container.innerHTML = `
                 <div class="animate-fade-in space-y-6 italic text-center">
-                    <div class="flex justify-between items-center"><h2 class="text-2xl font-black uppercase text-white">Planilha</h2><button onclick="saveWorkout()" class="bg-orange-500 text-black px-6 py-2 rounded-2xl font-black text-[10px] uppercase text-center">Salvar</button></div>
-                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x text-center">
+                    <div class="flex justify-between items-center text-center text-center"><h2 class="text-2xl font-black uppercase text-white text-center">Planilha</h2><button onclick="saveWorkout()" class="bg-orange-500 text-black px-6 py-2 rounded-2xl font-black text-[10px] uppercase text-center text-center">Salvar</button></div>
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x text-center text-center">
                         ${Array.from({length: freq}).map((_, i) => `
                             <div class="min-w-[300px] bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-6 snap-center text-center">
                                 <h3 class="text-orange-500 font-black uppercase text-[10px] mb-4 text-center">Dia ${i+1}</h3>
-                                <div class="space-y-3 text-center">
+                                <div class="space-y-3 text-center text-center">
                                     ${Array.from({length: 10}).map((_, r) => {
                                         const k = "d"+(i+1)+"_r"+(r+1);
                                         const p = k+"_pr";
-                                        return `<div class="space-y-1 text-center"><input type="text" data-key="${k}" class="workout-field w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm font-bold text-center text-center" placeholder="EXERCÍCIO ${r+1}" value="${esc(userData.workoutPlan?.[k] || '')}"><div class="flex items-center gap-2 pl-2 text-center text-center text-center"><span class="text-[9px] font-black text-orange-500 uppercase text-center">PR:</span><input type="text" data-key="${p}" class="workout-field bg-transparent border-b border-zinc-800 text-[11px] text-zinc-400 w-24 text-center outline-none text-center" placeholder="EX: 34KG" value="${esc(userData.workoutPlan?.[p] || '')}"></div></div>`;
+                                        return `<div class="space-y-1 text-center"><input type="text" data-key="${k}" class="workout-field w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm font-bold text-center text-center text-center" placeholder="EXERCÍCIO ${r+1}" value="${window.esc(userData.workoutPlan?.[k] || '')}"><div class="flex items-center gap-2 pl-2 text-center text-center"><span class="text-[9px] font-black text-orange-500 uppercase text-center">PR:</span><input type="text" data-key="${p}" class="workout-field bg-transparent border-b border-zinc-800 text-[11px] text-zinc-400 w-24 text-center outline-none text-center" placeholder="EX: 34KG" value="${window.esc(userData.workoutPlan?.[p] || '')}"></div></div>`;
                                     }).join('')}
                                 </div>
                             </div>`).join('')}
@@ -505,26 +547,26 @@
 
         function renderStore(container) {
             const items = [{ id: 'shirt_discount', name: 'Desconto Camiseta', cost: 900, icon: 'tag' },{ id: 'custom_workout', name: 'Treino Especial', cost: 915, icon: 'scroll-text' },{ id: 'shirt_full', name: 'Camiseta Pryme', cost: 1350, icon: 'shirt' },{ id: 'monthly_discount', name: 'Desconto Mensal', cost: 2250, icon: 'percent' }];
-            container.innerHTML = `<div class="animate-fade-in space-y-6 italic text-center text-center"><div class="p-8 bg-pryme rounded-[3rem] text-black text-center text-center"><p class="text-black/60 text-[10px] font-black uppercase text-center text-center">Saldo Atual</p><h3 class="text-5xl font-black text-center text-center">${userData.points || 0} PTS</h3></div><div class="grid grid-cols-1 gap-4 text-center text-center">${items.map(item => `<div class="p-5 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between shadow-lg text-center text-center"><div class="flex items-center gap-4 text-center text-center"><div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center text-center text-center"><i data-lucide="${item.icon}" class="text-orange-500 text-center text-center"></i></div><div class="text-left text-white uppercase text-left"><h4 class="font-bold text-sm text-left">${esc(item.name)}</h4><p class="text-orange-500 text-[10px] font-black text-left">${item.cost} PTS</p></div></div><button onclick="handlePurchase('${item.id}', ${item.cost})" class="px-5 py-2 rounded-2xl text-[10px] font-black uppercase bg-zinc-800 text-zinc-600 text-center ${userData.points >= item.cost ? 'bg-orange-500 text-black active:scale-95' : ''}">Resgatar</button></div>`).join('')}</div></div>`;
+            container.innerHTML = `<div class="animate-fade-in space-y-6 italic text-center text-center"><div class="p-8 bg-pryme rounded-[3rem] text-black text-center text-center"><p class="text-black/60 text-[10px] font-black uppercase text-center text-center">Saldo Atual</p><h3 class="text-5xl font-black text-center text-center text-center">${userData.points || 0} PTS</h3></div><div class="grid grid-cols-1 gap-4 text-center text-center text-center text-center">${items.map(item => `<div class="p-5 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between shadow-lg text-center text-center"><div class="flex items-center gap-4 text-center text-center"><div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center text-center text-center text-center text-center"><i data-lucide="${item.icon}" class="text-orange-500 text-center text-center text-center text-center"></i></div><div class="text-left text-white uppercase text-left"><h4 class="font-bold text-sm text-left text-left">${window.esc(item.name)}</h4><p class="text-orange-500 text-[10px] font-black text-left text-left">${item.cost} PTS</p></div></div><button onclick="handlePurchase('${item.id}', ${item.cost})" class="px-5 py-2 rounded-2xl text-[10px] font-black uppercase bg-zinc-800 text-zinc-600 text-center text-center ${userData.points >= item.cost ? 'bg-orange-500 text-black active:scale-95' : ''}">Resgatar</button></div>`).join('')}</div></div>`;
         }
 
         function renderProfile(container) {
             const av = userData.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.uid}`;
             container.innerHTML = `
-                <div class="animate-fade-in space-y-8 pb-10 flex flex-col items-center italic text-center text-center">
-                    <div class="relative text-center">
-                        <div class="w-36 h-36 rounded-[2.5rem] bg-zinc-900 border-4 border-orange-500 overflow-hidden shadow-2xl text-center"><img src="${av}" class="w-full h-full object-cover text-center" id="profile-avatar"></div>
-                        <button onclick="triggerPhotoUpload()" class="absolute -right-2 -bottom-2 w-12 h-12 bg-orange-500 rounded-2xl border-4 border-[#050505] flex items-center justify-center text-black active:scale-90 transition-transform text-center"><i data-lucide="camera" class="w-5 h-5 text-center text-center"></i></button>
+                <div class="animate-fade-in space-y-8 pb-10 flex flex-col items-center italic text-center text-center text-center">
+                    <div class="relative text-center text-center">
+                        <div class="w-36 h-36 rounded-[2.5rem] bg-zinc-900 border-4 border-orange-500 overflow-hidden shadow-2xl text-center text-center text-center"><img src="${av}" class="w-full h-full object-cover text-center text-center text-center" id="profile-avatar"></div>
+                        <button onclick="triggerPhotoUpload()" class="absolute -right-2 -bottom-2 w-12 h-12 bg-orange-500 rounded-2xl border-4 border-[#050505] flex items-center justify-center text-black active:scale-90 transition-transform text-center text-center text-center text-center"><i data-lucide="camera" class="w-5 h-5 text-center text-center text-center text-center"></i></button>
                         <input type="file" id="photo-upload" accept="image/*" onchange="handlePhotoChange(event)" style="display:none">
                     </div>
-                    <h2 class="text-3xl font-black uppercase text-white text-center">${esc(userData.name || 'Atleta')}</h2>
-                    <div class="grid grid-cols-2 gap-4 w-full text-center text-center">
-                        <div class="p-6 glass-card rounded-[2.5rem] active:bg-zinc-800 transition-colors shadow-sm text-center" onclick="openModal('weight')"><p class="text-zinc-500 text-[10px] font-black uppercase text-center">Peso</p><h4 class="text-xl font-black text-white text-center">${userData.weight}KG</h4><i data-lucide="edit-2" class="w-3 h-3 text-orange-500 mx-auto mt-2 text-center text-center"></i></div>
-                        <div class="p-6 glass-card rounded-[2.5rem] shadow-sm text-center"><p class="text-zinc-500 text-[10px] font-black uppercase text-center">Altura</p><h4 class="text-xl font-black text-white text-center">${userData.height}CM</h4></div>
+                    <h2 class="text-3xl font-black uppercase text-white text-center text-center text-center text-center">${window.esc(userData.name || 'Atleta')}</h2>
+                    <div class="grid grid-cols-2 gap-4 w-full text-center text-center text-center text-center">
+                        <div class="p-6 glass-card rounded-[2.5rem] active:bg-zinc-800 transition-colors shadow-sm text-center text-center text-center text-center text-center" onclick="openModal('weight')"><p class="text-zinc-500 text-[10px] font-black uppercase text-center text-center">Peso</p><h4 class="text-xl font-black text-white text-center text-center text-center">${userData.weight}KG</h4><i data-lucide="edit-2" class="w-3 h-3 text-orange-500 mx-auto mt-2 text-center text-center text-center"></i></div>
+                        <div class="p-6 glass-card rounded-[2.5rem] shadow-sm text-center text-center text-center text-center text-center"><p class="text-zinc-500 text-[10px] font-black uppercase text-center text-center text-center text-center">Altura</p><h4 class="text-xl font-black text-white text-center text-center text-center text-center">${userData.height}CM</h4></div>
                     </div>
-                    <div class="p-6 bg-zinc-900/30 border border-zinc-800 rounded-[2.5rem] flex justify-between w-full uppercase font-black text-center text-center">
-                        <div class="text-center text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center">Pontos</p><h4 class="text-xl italic text-orange-500 text-center">${userData.points || 0}</h4></div>
-                        <div class="text-center text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center">Treinos</p><h4 class="text-xl italic text-white text-center">${userData.totalCheckins || 0}</h4></div>
+                    <div class="p-6 bg-zinc-900/30 border border-zinc-800 rounded-[2.5rem] flex justify-between w-full uppercase font-black text-center text-center text-center">
+                        <div class="text-center text-center text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center text-center text-center">Pontos</p><h4 class="text-xl italic text-orange-500 text-center text-center text-center text-center">${userData.points || 0}</h4></div>
+                        <div class="text-center text-center text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center text-center text-center">Treinos</p><h4 class="text-xl italic text-white text-center text-center text-center text-center">${userData.totalCheckins || 0}</h4></div>
                     </div>
                 </div>`;
         }
@@ -540,10 +582,10 @@
             
             if(type === 'ranking') {
                 t.innerText = "Ranking Academia";
-                c.innerHTML = `<div class="flex border-b border-zinc-900 mb-6 text-center text-center">
-                    <button onclick="switchRankingMode('monthly')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'monthly' ? 'ranking-tab-active' : 'text-zinc-600'} text-center text-center text-center">Mensal</button>
-                    <button onclick="switchRankingMode('total')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'total' ? 'ranking-tab-active' : 'text-zinc-600'} text-center text-center text-center">Geral</button>
-                </div><div id="ranking-list" class="space-y-3 text-center text-center text-center text-center"><div class="text-center py-10 animate-spin text-center text-center text-center"><i data-lucide="loader-2"></i></div></div>`;
+                c.innerHTML = `<div class="flex border-b border-zinc-900 mb-6 text-center text-center text-center text-center">
+                    <button onclick="switchRankingMode('monthly')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'monthly' ? 'ranking-tab-active' : 'text-zinc-600'} text-center text-center text-center text-center">Mensal</button>
+                    <button onclick="switchRankingMode('total')" class="flex-1 py-3 font-black text-[10px] uppercase italic tracking-widest ${rankingMode === 'total' ? 'ranking-tab-active' : 'text-zinc-600'} text-center text-center text-center text-center text-center">Geral</button>
+                </div><div id="ranking-list" class="space-y-3 text-center text-center text-center text-center text-center text-center text-center text-center text-center"><div class="text-center py-10 animate-spin text-center text-center text-center text-center text-center"><i data-lucide="loader-2" class="text-center text-center"></i></div></div>`;
                 
                 const snap = await getDocs(query(collection(db, 'artifacts', appId, 'public', 'data', 'users')));
                 const curMonth = window.getLocalDateString().substring(0, 7);
@@ -554,23 +596,23 @@
                 list = rankingMode === 'monthly' ? list.sort((a,b) => b.monthly - a.monthly) : list.sort((a,b) => (b.totalCheckins || 0) - (a.totalCheckins || 0));
                 
                 document.getElementById('ranking-list').innerHTML = list.slice(0, 10).map((u, i) => `
-                    <div class="flex items-center justify-between bg-zinc-900/50 p-4 rounded-3xl border border-zinc-800 animate-fade-in text-left text-center">
-                        <div class="flex items-center gap-3 text-center text-center text-center text-center"><span class="text-orange-500 font-black italic w-4 text-center text-center text-center">${i+1}</span>
-                        <img src="${u.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.uid}`}" class="w-10 h-10 rounded-xl bg-zinc-800 object-cover text-center text-center">
-                        <p class="font-bold text-sm text-white uppercase italic text-center text-center">${esc(u.name ? u.name.split(' ')[0] : 'Atleta')}</p></div>
-                        <p class="font-black text-white italic text-xs text-center text-center">${rankingMode === 'monthly' ? u.monthly : (u.totalCheckins || 0)} TR</p>
+                    <div class="flex items-center justify-between bg-zinc-900/50 p-4 rounded-3xl border border-zinc-800 animate-fade-in text-left text-center text-center">
+                        <div class="flex items-center gap-3 text-center text-center text-center text-center text-center"><span class="text-orange-500 font-black italic w-4 text-center text-center text-center text-center">${i+1}</span>
+                        <img src="${u.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.uid}`}" class="w-10 h-10 rounded-xl bg-zinc-800 object-cover text-center text-center text-center text-center text-center">
+                        <p class="font-bold text-sm text-white uppercase italic text-center text-center text-center text-center">${window.esc(u.name ? u.name.split(' ')[0] : 'Atleta')}</p></div>
+                        <p class="font-black text-white italic text-xs text-center text-center text-center text-center">${rankingMode === 'monthly' ? u.monthly : (u.totalCheckins || 0)} TR</p>
                     </div>`).join('');
             }
             
             if(type === 'achievements') {
                 t.innerText = "Conquistas";
                 const userTitles = userData.titles || [];
-                c.innerHTML = `<div class="grid grid-cols-2 gap-4 italic uppercase text-center text-center text-center">
+                c.innerHTML = `<div class="grid grid-cols-2 gap-4 italic uppercase text-center text-center text-center text-center text-center">
                     ${Object.keys(achievementInfo).map(ach => {
                         const has = userTitles.includes(ach);
-                        return `<div class="p-4 rounded-2xl border ${has ? 'border-orange-500 bg-orange-500/10' : 'border-zinc-800 bg-zinc-900/50 opacity-50'} text-center text-center">
-                            <i data-lucide="award" class="mx-auto mb-2 ${has ? 'text-orange-500' : 'text-zinc-600'} text-center text-center"></i>
-                            <p class="font-bold text-[10px] tracking-widest text-center text-center">${ach}</p>
+                        return `<div class="p-4 rounded-2xl border ${has ? 'border-orange-500 bg-orange-500/10' : 'border-zinc-800 bg-zinc-900/50 opacity-50'} text-center text-center text-center text-center">
+                            <i data-lucide="award" class="mx-auto mb-2 ${has ? 'text-orange-500' : 'text-zinc-600'} text-center text-center text-center text-center"></i>
+                            <p class="font-bold text-[10px] tracking-widest text-center text-center text-center text-center">${ach}</p>
                         </div>`;
                     }).join('')}
                 </div>`;
@@ -579,16 +621,17 @@
             if(type === 'calendar') {
                 t.innerText = "Vista Anual";
                 const historySet = new Set(userData.history || []);
+                const currentYear = new Date().getFullYear();
                 const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-                c.innerHTML = `<div class="space-y-4 text-white italic border-t border-zinc-900 pt-4 text-center text-center">
+                c.innerHTML = `<div class="space-y-4 text-white italic border-t border-zinc-900 pt-4 text-center text-center text-center text-center">
                     ${months.map((m, i) => {
-                        const days = new Date(new Date().getFullYear(), i + 1, 0).getDate();
-                        return `<div class="bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50 text-center">
-                            <h4 class="text-[10px] font-black uppercase text-zinc-500 mb-2 italic tracking-widest text-center text-center">${m}</h4>
-                            <div class="grid grid-cols-7 gap-1 text-center">
-                                ${Array.from({length: days}).map((_, d) => {
-                                    const ds = new Date().getFullYear() + "-" + String(i+1).padStart(2,'0') + "-" + String(d+1).padStart(2,'0');
-                                    return `<div class="aspect-square rounded-sm ${historySet.has(ds) ? 'bg-orange-500 shadow-sm shadow-orange-500/50' : 'bg-zinc-800/40'} text-center"></div>`;
+                        const daysInMonth = new Date(currentYear, i + 1, 0).getDate();
+                        return `<div class="bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50 text-center text-center">
+                            <h4 class="text-[10px] font-black uppercase text-zinc-500 mb-2 italic tracking-widest text-center text-center text-center text-center">${m}</h4>
+                            <div class="grid grid-cols-7 gap-1 text-center text-center">
+                                ${Array.from({length: daysInMonth}).map((_, d) => {
+                                    const ds = currentYear + "-" + String(i+1).padStart(2,'0') + "-" + String(d+1).padStart(2,'0');
+                                    return `<div class="aspect-square rounded-sm ${historySet.has(ds) ? 'bg-orange-500 shadow-sm shadow-orange-500/50' : 'bg-zinc-800/40'} text-center text-center text-center"></div>`;
                                 }).join('')}
                             </div>
                         </div>`;
@@ -598,29 +641,29 @@
 
             if(type==='notes') { 
                 t.innerText = "Anotações"; 
-                c.innerHTML = `<textarea id="user-notes" class="w-full h-48 bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic font-bold text-center" placeholder="ANOTE RECORDES OU METAS...">${userData.notes || ''}</textarea><button onclick="saveNotes()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center text-center">Salvar</button>`; 
+                c.innerHTML = `<textarea id="user-notes" class="w-full h-48 bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic font-bold text-center text-center" placeholder="ANOTE RECORDES OU METAS...">${userData.notes || ''}</textarea><button onclick="saveNotes()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center text-center text-center">Salvar</button>`; 
             }
             if(type === 'pryme_upsell') {
                 t.innerText = "Membro Pryme";
                 c.innerHTML = `
-                    <div class="space-y-6 italic text-center text-center">
-                        <div class="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4"><i data-lucide="zap" class="text-orange-500 w-10 h-10"></i></div>
-                        <p class="text-sm font-bold text-white uppercase tracking-widest">Turbina o Teu Progresso!</p>
-                        <ul class="text-left space-y-4 text-xs text-zinc-400">
-                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4"></i> 15 PTS por treino (hoje ganhas apenas ${userData.plan==='Wellhub'?'4':'3'})</li>
-                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4"></i> Prioridade em Eventos da Academia</li>
-                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4"></i> Descontos Exclusivos na Loja</li>
+                    <div class="space-y-6 italic text-center text-center text-center text-center">
+                        <div class="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-center text-center"><i data-lucide="zap" class="text-orange-500 w-10 h-10 text-center text-center"></i></div>
+                        <p class="text-sm font-bold text-white uppercase tracking-widest text-center text-center text-center">Turbina o Teu Progresso!</p>
+                        <ul class="text-left space-y-4 text-xs text-zinc-400 text-center text-center">
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center"></i> 15 PTS por treino (Wellhub ganha 4)</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center"></i> Prioridade em Eventos</li>
+                            <li class="flex items-center gap-3"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center"></i> Descontos Exclusivos</li>
                         </ul>
-                        <button onclick="showToast('Fala com o consultor na recepção!')" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase">Saber Mais</button>
+                        <button onclick="showToast('Fala com o consultor na recepção!')" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center text-center">Saber Mais</button>
                     </div>`;
             }
             if(type==='confirm_delete') { 
                 t.innerText = "Eliminar Conta?"; 
-                c.innerHTML = `<div class="space-y-6 text-center text-center"><p class="text-sm font-bold uppercase text-center text-center">Apagar todos os teus treinos e pontos?</p><button onclick="confirmAccountDeletion()" class="w-full bg-red-500 text-white p-5 rounded-3xl font-black uppercase text-center text-center">Sim, Eliminar</button></div>`; 
+                c.innerHTML = `<div class="space-y-6 text-center text-center text-center text-center text-center"><p class="text-sm font-bold uppercase text-center text-center text-center text-center">Apagar todos os teus treinos e pontos?</p><button onclick="confirmAccountDeletion()" class="w-full bg-red-500 text-white p-5 rounded-3xl font-black uppercase text-center text-center text-center">Sim, Eliminar</button></div>`; 
             }
             if(type === 'weight') { 
                 t.innerText = "Peso"; 
-                c.innerHTML = `<input type="number" id="new-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-center text-3xl font-black text-white italic uppercase text-center" value="${userData.weight}"><button onclick="saveUserData({weight: parseFloat(document.getElementById('new-weight').value)}).then(()=>{closeModal();renderApp();})" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center text-center">Salvar</button>`; 
+                c.innerHTML = `<input type="number" id="new-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-center text-3xl font-black text-white italic uppercase text-center text-center text-center text-center" value="${userData.weight}"><button onclick="saveUserData({weight: parseFloat(document.getElementById('new-weight').value)}).then(()=>{closeModal();renderApp();})" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center text-center text-center">Salvar</button>`; 
             }
             lucide.createIcons();
         };
