@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-    <title>Pryme Fitness 12.3 - Google Login Fix</title>
+    <title>Pryme Fitness 12.8 - Correção de Funções</title>
     
     <link rel="manifest" href="manifest.json">
     <meta name="apple-mobile-web-app-capable" content="yes">
@@ -44,7 +44,7 @@
         <div class="w-12 h-1 bg-zinc-800 rounded-full overflow-hidden">
             <div class="bg-orange-500 h-full w-1/2 animate-[progress_1.5s_infinite] origin-left"></div>
         </div>
-        <p id="loading-text" class="mt-6 text-zinc-500 font-bold tracking-widest text-[10px] uppercase italic text-center">Sincronizando Ecossistema</p>
+        <p id="loading-text" class="mt-6 text-zinc-500 font-bold tracking-widest text-[10px] uppercase italic text-center">Iniciando Ecossistema...</p>
     </div>
 
     <!-- Auth Screen -->
@@ -61,11 +61,11 @@
         <header class="p-6 flex justify-between items-center z-40 bg-[#050505]/95 border-b border-white/5">
             <img src="logo.png" alt="Pryme" class="logo-header" onerror="this.outerHTML='<div class=\'logo-placeholder\'>P</div>'">
             <div class="flex items-center gap-4">
-                <div class="flex items-center gap-1.5 bg-zinc-900/50 border border-zinc-800 px-3 py-1.5 rounded-full shadow-inner">
+                <div id="header-streak-container" class="flex items-center gap-1.5 bg-zinc-900/50 border border-zinc-800 px-3 py-1.5 rounded-full shadow-inner">
                     <i data-lucide="flame" id="streak-icon" class="w-4 h-4 text-zinc-600 transition-colors"></i>
                     <span id="header-streak" class="text-sm font-black text-white">0</span>
                 </div>
-                <button onclick="window.toggleSideMenu()" class="p-2 bg-zinc-900 rounded-2xl border border-zinc-800 active:bg-zinc-800">
+                <button id="menu-toggle-btn" onclick="window.toggleSideMenu()" class="p-2 bg-zinc-900 rounded-2xl border border-zinc-800 active:bg-zinc-800">
                     <i data-lucide="menu" class="w-6 h-6 text-white text-center"></i>
                 </button>
             </div>
@@ -84,19 +84,19 @@
         <div id="side-drawer" class="fixed inset-0 pointer-events-none text-center">
             <div id="drawer-overlay" class="absolute inset-0 bg-black/80 opacity-0 transition-opacity duration-300" onclick="window.toggleSideMenu()"></div>
             <div id="drawer-content" class="absolute right-0 top-0 bottom-0 w-72 bg-zinc-950 border-l border-white/5 translate-x-full transition-transform duration-300 flex flex-col shadow-2xl">
-                <div class="p-6 flex justify-between items-center border-b border-zinc-900 text-center">
+                <div class="p-6 flex justify-between items-center border-b border-zinc-900 text-center text-white">
                     <h2 class="text-xl font-black italic uppercase text-white">Menu</h2>
-                    <button onclick="window.toggleSideMenu()" class="p-2 bg-zinc-900 rounded-xl"><i data-lucide="x" class="w-5 h-5 text-white text-center"></i></button>
+                    <button onclick="window.toggleSideMenu()" class="p-2 bg-zinc-900 rounded-xl"><i data-lucide="x" class="w-5 h-5 text-white"></i></button>
                 </div>
                 <div class="flex-1 p-4 space-y-3 uppercase text-[10px] font-black italic text-center">
-                    <button onclick="window.toggleSideMenu(); window.openModal('achievements')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-white"><i data-lucide="award" class="text-orange-500 text-center text-center"></i>Conquistas</button>
+                    <button onclick="window.toggleSideMenu(); window.openModal('achievements')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-white"><i data-lucide="award" class="text-orange-500 text-center"></i>Conquistas</button>
                     <button onclick="window.toggleSideMenu(); window.openModal('ranking')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-white"><i data-lucide="trending-up" class="text-orange-500 text-center"></i>Ranking Academia</button>
                     <button onclick="window.toggleSideMenu(); window.openModal('calendar')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-white"><i data-lucide="calendar" class="text-orange-500 text-center"></i>Vista Anual</button>
                     <button onclick="window.toggleSideMenu(); window.openModal('notes')" class="w-full text-left p-4 rounded-3xl bg-zinc-900/50 flex items-center gap-4 active:bg-zinc-800 text-white"><i data-lucide="sticky-note" class="text-orange-500 text-center"></i>Anotações</button>
                 </div>
                 <div class="p-6 border-t border-zinc-900 space-y-2">
-                    <button onclick="window.handleLogout()" class="w-full p-4 rounded-3xl bg-zinc-900 text-zinc-500 font-bold border border-zinc-800 uppercase text-[10px] italic active:scale-95 transition-all text-center text-center text-center">Sair da Conta</button>
-                    <button onclick="window.toggleSideMenu(); window.openModal('confirm_delete')" class="w-full p-4 rounded-3xl bg-red-500/10 text-red-500 font-bold border border-red-500/20 uppercase text-[10px] italic active:scale-95 transition-all text-red-500 text-center text-center text-center">Excluir Perfil</button>
+                    <button onclick="window.handleLogout()" class="w-full p-4 rounded-3xl bg-zinc-900 text-zinc-500 font-bold border border-zinc-800 uppercase text-[10px] italic active:scale-95 transition-all text-center">Sair da Conta</button>
+                    <button onclick="window.toggleSideMenu(); window.openModal('confirm_delete')" class="w-full p-4 rounded-3xl bg-red-500/10 text-red-500 font-bold border border-red-500/20 uppercase text-[10px] italic active:scale-95 transition-all text-red-500 text-center">Excluir Perfil</button>
                 </div>
             </div>
         </div>
@@ -110,13 +110,13 @@
                 <h3 id="modal-title" class="text-xl font-black text-center text-white">Modal</h3>
                 <button onclick="window.closeModal()" class="p-2 bg-zinc-900 rounded-xl text-center"><i data-lucide="x" class="w-5 h-5 text-white text-center"></i></button>
             </div>
-            <div id="modal-content" class="p-6 overflow-y-auto text-center text-center"></div>
+            <div id="modal-content" class="p-6 overflow-y-auto text-center"></div>
         </div>
     </div>
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
-        import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, deleteUser } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
         import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, getDocs, arrayUnion, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
         const firebaseConfig = {
@@ -140,12 +140,12 @@
         let rankingMode = 'monthly';
         window.obData = { freq: 3, plan: 'Pryme' };
 
-        // --- GPS CONSTANTS ---
+        // --- GPS ---
         const GYM_LAT = -29.60922880510937; 
         const GYM_LON = -51.17387061571298; 
         const MAX_DISTANCE_METERS = 50;
 
-        // --- GLOBAL UTILS ---
+        // --- UTILS ---
         function esc(s = "") { return String(s).replaceAll("&", "&amp;").replaceAll('"', "&quot;").replaceAll("<", "&lt;").replaceAll(">", "&gt;"); }
         window.esc = esc;
         window.getLocalDateString = () => new Date().toISOString().split('T')[0];
@@ -158,17 +158,64 @@
             return R * 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a));
         }
 
-        // --- ATTACH GLOBALS ---
+        const achievementInfo = {
+            'Iniciado': { req: 1, desc: 'Deste o primeiro passo na Pryme!' },
+            'Fiel': { req: 50, desc: '50 treinos de pura constância.' },
+            'Centurião': { req: 100, desc: 'Elite dos 100 treinos concluídos.' },
+            'Inabalável': { req: 500, desc: 'Nada te pode parar. 500 treinos!' },
+            'Lenda Suprema': { req: 1000, desc: 'Imortalizado na história da Pryme.' }
+        };
+
+        // --- ATTACH GLOBALS (ORGAZANIÇÃO REFORÇADA) ---
         window.toggleAuthMode = () => { authMode = authMode === 'login' ? 'signup' : 'login'; renderAuthUI(); };
         window.navigate = (t) => { currentTab = t; renderApp(); };
         window.closeModal = () => document.getElementById('modal-overlay').classList.add('hidden');
-        window.handleLogout = () => signOut(auth).then(() => location.reload());
-        window.showScreen = (id) => { ['loading-screen', 'auth-screen', 'main-container'].forEach(s => document.getElementById(s).classList.add('hidden')); document.getElementById(id).classList.remove('hidden'); };
-        window.toggleSideMenu = () => { const c = document.getElementById('drawer-content'); const o = document.getElementById('drawer-overlay'); const d = document.getElementById('side-drawer'); if (c.classList.contains('translate-x-full')) { d.classList.remove('pointer-events-none'); o.classList.replace('opacity-0', 'opacity-100'); c.classList.replace('translate-x-full', 'translate-x-0'); } else { d.classList.add('pointer-events-none'); o.classList.replace('opacity-100', 'opacity-0'); c.classList.replace('translate-x-0', 'translate-x-full'); } };
-        window.showToast = (m, e) => { const ct = document.getElementById('toast-container'); const t = document.createElement('div'); t.className = `p-4 rounded-full px-8 font-black uppercase text-[10px] shadow-2xl animate-fade-in mb-2 ${e ? 'bg-red-500 text-white' : 'bg-orange-500 text-black'}`; t.innerText = m; ct.appendChild(t); setTimeout(() => t.remove(), 4000); };
-        window.saveUserData = async (d) => { try { await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid), d, {merge:true}); userData = {...userData, ...d}; return true; } catch (e) { window.showToast("Erro Firestore!", true); return false; } };
+        window.handleLogout = () => signOut(auth).then(() => { window.location.reload(); });
+        window.showScreen = (id) => { 
+            ['loading-screen', 'auth-screen', 'main-container'].forEach(s => document.getElementById(s).classList.add('hidden')); 
+            document.getElementById(id).classList.remove('hidden'); 
+        };
+        window.toggleSideMenu = () => { 
+            if (!userData) return;
+            const c = document.getElementById('drawer-content'); const o = document.getElementById('drawer-overlay'); const d = document.getElementById('side-drawer'); 
+            if (c.classList.contains('translate-x-full')) { d.classList.remove('pointer-events-none'); o.classList.replace('opacity-0', 'opacity-100'); c.classList.replace('translate-x-full', 'translate-x-0'); } 
+            else { d.classList.add('pointer-events-none'); o.classList.replace('opacity-100', 'opacity-0'); c.classList.replace('translate-x-0', 'translate-x-full'); } 
+        };
+        window.showToast = (m, e) => { 
+            const ct = document.getElementById('toast-container'); const t = document.createElement('div'); 
+            t.className = `p-4 rounded-full px-8 font-black uppercase text-[10px] shadow-2xl animate-fade-in mb-2 ${e ? 'bg-red-500 text-white' : 'bg-orange-500 text-black'}`; 
+            t.innerText = m; ct.appendChild(t); setTimeout(() => t.remove(), 4000); 
+        };
+        window.saveUserData = async (d) => { 
+            try { 
+                await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid), d, {merge:true}); 
+                userData = {...userData, ...d}; return true; 
+            } catch (e) { window.showToast("Erro Firebase!", true); return false; } 
+        };
+        window.saveWorkout = async () => {
+            const fields = document.querySelectorAll('.workout-field');
+            const plan = {};
+            fields.forEach(f => { if(f.dataset.key) plan[f.dataset.key] = f.value; });
+            if(await window.saveUserData({ workoutPlan: plan })) window.showToast("Planilha Salva!");
+        };
+        window.saveNotes = async () => { const val = document.getElementById('user-notes').value; if(await window.saveUserData({ notes: val })) { window.showToast("Anotado!"); window.closeModal(); } };
+        window.addWater = async () => {
+            const current = userData.waterML || 0;
+            const updates = { waterML: current + 500, lastWaterUpdate: window.getLocalDateString() };
+            if(await window.saveUserData(updates)) renderApp();
+        };
+        window.handlePurchase = async (i, c) => { if(userData.points >= c) { if(await window.saveUserData({ points: userData.points - c })) { window.showToast("Resgatado!"); renderApp(); } } else { window.showToast("Pontos insuficientes!", true); } };
+        window.confirmAccountDeletion = async () => {
+            try {
+                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid));
+                try { await deleteUser(user); window.showToast("Perfil eliminado!"); } 
+                catch (e) { window.showToast("Dados limpos. Login Google impede exclusão imediata do e-mail.", true); }
+                setTimeout(() => window.location.reload(), 2000);
+            } catch (e) { window.showToast("Erro ao eliminar dados.", true); }
+        };
         window.setObFreq = (v) => { window.obData.freq = v; document.querySelectorAll('.ob-freq').forEach(b => { b.classList.remove('border-orange-500', 'bg-orange-500/10', 'text-orange-500'); if(parseInt(b.dataset.val) === v) b.classList.add('border-orange-500', 'bg-orange-500/10', 'text-orange-500'); }); };
         window.setObPlan = (v) => { window.obData.plan = v; document.querySelectorAll('.ob-plan').forEach(b => { b.classList.remove('border-orange-500', 'bg-orange-500/10'); if(b.dataset.val === v) b.classList.add('border-orange-500', 'bg-orange-500/10'); }); };
+        window.switchRankingMode = (mode) => { rankingMode = mode; window.openModal('ranking'); };
 
         // --- AUTH LOGIC ---
         window.handleLogin = async () => {
@@ -177,63 +224,34 @@
             if(!email || !password) return window.showToast("Preencha todos os campos", true);
             try { 
                 window.showScreen('loading-screen');
-                document.getElementById('loading-text').innerText = "Autenticando...";
                 await signInWithEmailAndPassword(auth, email, password); 
             } catch (e) { 
                 window.showScreen('auth-screen');
-                window.showToast(`Falha: ${e.message}`, true); 
+                window.showToast("Dados incorretos.", true); 
             }
         };
 
         window.handleGoogleLogin = async () => {
             const provider = new GoogleAuthProvider();
-            try { 
-                // Usar Redirect para PWAs em telemóvel para evitar bloqueio de popup
-                await signInWithRedirect(auth, provider); 
-            } catch (e) { 
-                window.showToast(`Erro Google: ${e.code}`, true); 
-            }
+            try { await signInWithRedirect(auth, provider); } catch (e) { window.showToast(`Erro Google: ${e.code}`, true); }
         };
 
         window.handleSignup = async () => {
             const email = document.getElementById('email').value.trim();
             const password = document.getElementById('password').value;
-            if(password.length < 6) return window.showToast("Senha mín. 6 caracteres", true);
+            if(password.length < 6) return window.showToast("Senha mínima 6 caracteres", true);
             try { 
                 window.showScreen('loading-screen');
                 await createUserWithEmailAndPassword(auth, email, password); 
             } catch (e) { 
                 window.showScreen('auth-screen');
-                window.showToast(`Erro: ${e.message}`, true); 
+                window.showToast("Erro ao cadastrar e-mail.", true); 
             }
         };
 
         // --- SYNC ENGINE ---
-        onAuthStateChanged(auth, async (u) => {
-            if (u) {
-                user = u;
-                document.getElementById('loading-text').innerText = "Sincronizando Dados...";
-                await syncUserData();
-            } else {
-                // Ao recarregar após redirect, tenta capturar o resultado antes de mostrar login
-                try { 
-                    const result = await getRedirectResult(auth);
-                    if (result && result.user) {
-                        user = result.user;
-                        await syncUserData();
-                        return;
-                    }
-                } catch (e) { 
-                    window.showToast(`Erro ao voltar do Google: ${e.code}`, true);
-                    console.error("Erro redirect:", e); 
-                }
-                
-                renderAuthUI();
-                window.showScreen('auth-screen');
-            }
-        });
-
         async function syncUserData() {
+            document.getElementById('loading-text').innerText = "Sincronizando Perfil...";
             try {
                 const docRef = doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid);
                 const snap = await getDoc(docRef);
@@ -246,25 +264,43 @@
                         userData.lastWaterUpdate = today;
                         await updateDoc(docRef, { waterML: 0, lastWaterUpdate: today });
                     }
+                    document.getElementById('menu-toggle-btn').classList.remove('hidden');
+                    document.getElementById('header-streak-container').classList.remove('hidden');
+                    document.getElementById('bottom-nav').classList.remove('hidden');
                     renderApp();
                     window.showScreen('main-container');
-                    document.getElementById('bottom-nav').classList.remove('hidden');
                 } else {
-                    // Usuário logado mas sem perfil = Onboarding
                     renderOnboarding();
                     window.showScreen('main-container');
+                    document.getElementById('menu-toggle-btn').classList.add('hidden');
+                    document.getElementById('header-streak-container').classList.add('hidden');
                     document.getElementById('bottom-nav').classList.add('hidden');
                 }
             } catch (e) {
                 console.error("Erro Firestore:", e);
-                document.getElementById('loading-text').innerHTML = `<span class="text-red-500 text-xs">Erro Firebase: ${e.code}<br>Consulte a sua conexão!</span>`;
+                document.getElementById('loading-text').innerHTML = `<span class="text-red-500 text-xs">Erro Firebase: ${e.code}<br>Consulte sua internet!</span>`;
                 window.showToast(`Falha de ligação: ${e.code}`, true);
-                // Fallback para login se falhar muito
-                setTimeout(() => window.handleLogout(), 5000);
             }
         }
 
-        // --- FOTO E CADASTRO ---
+        async function startApp() {
+            document.getElementById('loading-text').innerText = "Validando acesso...";
+            try {
+                const result = await getRedirectResult(auth);
+                if (result && result.user) {
+                    user = result.user;
+                    await syncUserData();
+                    return;
+                }
+            } catch (e) { console.error("Erro Redirect:", e); }
+
+            onAuthStateChanged(auth, async (u) => {
+                if (u) { user = u; await syncUserData(); } 
+                else { renderAuthUI(); window.showScreen('auth-screen'); }
+            });
+        }
+
+        // --- FOTO E ONBOARDING ---
         window.handlePhotoChange = async (event) => {
             const file = event.target.files[0]; if (!file) return;
             window.showToast("Processando imagem...");
@@ -288,7 +324,7 @@
             const n = document.getElementById('ob-name').value.trim();
             const w = parseFloat(document.getElementById('ob-weight').value);
             const h = parseFloat(document.getElementById('ob-height').value);
-            if(!n || isNaN(w) || isNaN(h)) return window.showToast("Preencha todos os campos!", true);
+            if(!n || isNaN(w) || isNaN(h)) return window.showToast("Preencha peso e altura!", true);
 
             const btn = document.getElementById('btn-submit-ob');
             btn.innerText = "Salvando..."; btn.disabled = true;
@@ -304,14 +340,18 @@
             try {
                 await setDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid), data);
                 userData = data;
-                window.showToast("Perfil ativado!");
+                window.showToast("Perfil Pryme Ativo!");
+                document.getElementById('menu-toggle-btn').classList.remove('hidden');
+                document.getElementById('header-streak-container').classList.remove('hidden');
                 document.getElementById('bottom-nav').classList.remove('hidden');
                 renderApp();
             } catch (e) {
                 btn.innerText = "Concluir Cadastro"; btn.disabled = false;
-                window.showToast(`Erro ao gravar: ${e.code}`, true);
+                window.showToast(`Erro ao gravar dados!`, true);
             }
         };
+
+        window.triggerPhotoUpload = () => document.getElementById('photo-upload').click();
 
         // --- RENDERERS ---
         function renderAuthUI() {
@@ -327,10 +367,10 @@
                         <input type="password" id="password" class="w-full bg-zinc-900 border border-zinc-800 rounded-2xl p-4 text-sm" placeholder="Escolha uma Senha">
                         <button onclick="window.handleSignup()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black uppercase active:scale-95 transition-all text-center">Cadastrar</button>
                     `}
-                    <div class="flex items-center gap-4 my-4 opacity-30 text-center"><div class="h-[1px] bg-white flex-1"></div><span>OU</span><div class="h-[1px] bg-white flex-1"></div></div>
-                    <button onclick="window.handleGoogleLogin()" class="w-full bg-white text-black p-5 rounded-3xl font-black uppercase flex items-center justify-center gap-3 active:scale-95 transition-all italic text-center">
+                    <div class="flex items-center gap-4 my-4 opacity-30 text-center"><div class="h-[1px] bg-white flex-1"></div><span>OU</span><div class="h-[1px] bg-white flex-1 text-center"></div></div>
+                    <button onclick="window.handleGoogleLogin()" class="w-full bg-white text-black p-5 rounded-3xl font-black uppercase flex items-center justify-center gap-3 active:scale-95 transition-all italic text-center text-center">
                         <svg class="w-5 h-5" viewBox="0 0 24 24"><path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/><path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/><path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/><path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/></svg>
-                        Google Login
+                        Login com Google
                     </button>
                     <button onclick="window.toggleAuthMode()" class="w-full text-zinc-500 text-[10px] font-black uppercase mt-4 underline decoration-orange-500 text-center">${authMode === 'login' ? 'Criar Novo Perfil' : 'Já tenho conta'}</button>
                 </div>`;
@@ -350,13 +390,13 @@
                         </div>
                         <div class="space-y-3 text-left">
                             <p class="text-zinc-500 text-[10px] font-black ml-2">Frequência Semanal</p>
-                            <div class="flex gap-2">
+                            <div class="flex gap-2 text-center">
                                 ${[3,4,5].map(f => `<button onclick="window.setObFreq(${f})" class="ob-freq flex-1 bg-zinc-900 border border-zinc-800 rounded-2xl p-4 font-black ${f===3?'border-orange-500 bg-orange-500/10 text-orange-500':''}" data-val="${f}">${f}X</button>`).join('')}
                             </div>
                         </div>
                         <div class="space-y-3 text-left">
                             <p class="text-zinc-500 text-[10px] font-black ml-2 text-left">Teu Plano</p>
-                            <div class="space-y-2">
+                            <div class="space-y-2 text-center">
                                 ${[{id:'Pryme', pts:15},{id:'Wellhub', pts:4},{id:'Visitante', pts:3}].map(p => `
                                     <button onclick="window.setObPlan('${p.id}')" class="ob-plan w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 flex justify-between items-center transition-all ${p.id==='Pryme'?'border-orange-500 bg-orange-500/10':''}" data-val="${p.id}">
                                         <span class="font-bold uppercase text-xs">${p.id} Member</span>
@@ -371,7 +411,6 @@
             lucide.createIcons();
         }
 
-        // --- APP PAGES ---
         function renderApp() {
             const content = document.getElementById('app-content');
             content.innerHTML = '';
@@ -393,7 +432,7 @@
         function renderDashboard(container) {
             const ptsBanner = userData.plan === 'Pryme' ? '' : `
                 <div class="animate-fade-in p-4 upgrade-banner rounded-2xl flex items-center justify-between gap-4 mb-6 cursor-pointer active:scale-95 transition-all text-left" onclick="window.openModal('pryme_upsell')">
-                    <div class="flex items-center gap-3">
+                    <div class="flex items-center gap-3 text-left">
                         <div class="w-10 h-10 bg-orange-500 rounded-xl flex items-center justify-center text-center"><i data-lucide="crown" class="text-black w-5 h-5 text-center"></i></div>
                         <div><h4 class="font-black text-xs uppercase italic tracking-widest text-orange-500">Membro Pryme?</h4><p class="text-[9px] text-zinc-400 font-bold uppercase tracking-widest text-left">Ganhe 15 pts em vez de ${userData.plan==='Wellhub'?'4':'3'}!</p></div>
                     </div><i data-lucide="chevron-right" class="text-orange-500 w-4 h-4 text-center"></i>
@@ -402,17 +441,17 @@
                 <div class="animate-fade-in space-y-6 italic text-center">
                     ${ptsBanner}
                     <div class="p-8 bg-zinc-900/50 border border-zinc-800 rounded-[3rem] flex flex-col items-center shadow-xl text-center">
-                        <p class="text-zinc-500 text-[10px] font-black mb-2 uppercase text-center text-center">Meta Batida</p>
+                        <p class="text-zinc-500 text-[10px] font-black mb-2 uppercase text-center">Meta Batida</p>
                         <h4 class="text-3xl font-black mb-6 uppercase italic underline decoration-orange-500 decoration-4 text-center text-center">${userData.totalCheckins || 0} Treinos</h4>
-                        <button id="btn-checkin-action" onclick="window.handleCheckin()" class="w-44 h-44 rounded-full bg-pryme border-[8px] border-zinc-950 flex flex-col items-center justify-center gap-2 shadow-2xl active:scale-95 transition-all text-center">
-                            <i data-lucide="zap" class="text-black w-10 h-10 text-center"></i><span class="text-black font-black text-lg text-center">CHECK-IN</span>
+                        <button id="btn-checkin-action" onclick="window.handleCheckin()" class="w-44 h-44 rounded-full bg-pryme border-[8px] border-zinc-950 flex flex-col items-center justify-center gap-2 shadow-2xl active:scale-95 transition-all">
+                            <i data-lucide="zap" class="text-black w-10 h-10 text-center text-center"></i><span class="text-black font-black text-lg text-center text-center">CHECK-IN</span>
                         </button>
                     </div>
                     <div class="p-6 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between text-center text-center">
-                        <div class="flex items-center gap-4 text-center">
+                        <div class="flex items-center gap-4 text-center text-center">
                             <div class="w-12 h-12 bg-blue-600/20 rounded-2xl flex items-center justify-center text-center text-center"><i data-lucide="droplet" class="text-blue-500 text-center text-center"></i></div>
                             <div class="text-left text-white italic"><p class="text-[10px] font-black uppercase text-zinc-500 text-left">Hidratação</p><h4 class="text-xl font-black text-center">${userData.waterML || 0} ML</h4></div>
-                        </div><button onclick="window.addWater()" class="bg-zinc-800 text-blue-400 p-4 rounded-2xl active:scale-90 transition-all text-center text-center"><i data-lucide="plus" class="text-center text-center"></i></button>
+                        </div><button onclick="window.addWater()" class="bg-zinc-800 text-blue-400 p-4 rounded-2xl active:scale-90 transition-all text-center text-center text-center text-center"><i data-lucide="plus" class="text-center text-center text-center"></i></button>
                     </div>
                 </div>`;
         }
@@ -422,15 +461,14 @@
             container.innerHTML = `
                 <div class="animate-fade-in space-y-6 italic text-center">
                     <div class="flex justify-between items-center text-center text-center text-center"><h2 class="text-2xl font-black uppercase text-white text-center">Planilha</h2><button onclick="window.saveWorkout()" class="bg-orange-500 text-black px-6 py-2 rounded-2xl font-black text-[10px] uppercase text-center text-center">Salvar</button></div>
-                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x text-center text-center">
+                    <div class="flex gap-4 overflow-x-auto pb-4 snap-x text-center">
                         ${Array.from({length: freq}).map((_, i) => `
                             <div class="min-w-[300px] bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] p-6 snap-center text-center">
-                                <h3 class="text-orange-500 font-black uppercase text-[10px] mb-4 text-center text-center">Dia ${i+1}</h3>
-                                <div class="space-y-3 text-center">
+                                <h3 class="text-orange-500 font-black uppercase text-[10px] mb-4 text-center text-center text-center">Dia ${i+1}</h3>
+                                <div class="space-y-3">
                                     ${Array.from({length: 10}).map((_, r) => {
-                                        const k = "d"+(i+1)+"_r"+(r+1);
-                                        const p = k+"_pr";
-                                        return `<div class="space-y-1 text-center text-center"><input type="text" data-key="${k}" class="workout-field w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm font-bold text-center text-center text-center" placeholder="EXERCÍCIO ${r+1}" value="${window.esc(userData.workoutPlan?.[k] || '')}"><div class="flex items-center gap-2 pl-2 text-center text-center text-center"><span class="text-[9px] font-black text-orange-500 uppercase text-center">PR:</span><input type="text" data-key="${p}" class="workout-field bg-transparent border-b border-zinc-800 text-[11px] text-zinc-400 w-24 text-center text-center outline-none" placeholder="EX: 34KG" value="${window.esc(userData.workoutPlan?.[p] || '')}"></div></div>`;
+                                        const k = "d"+(i+1)+"_r"+(r+1); const p = k+"_pr";
+                                        return `<div class="space-y-1 text-center text-center text-center"><input type="text" data-key="${k}" class="workout-field w-full bg-zinc-950 border border-zinc-800 rounded-xl p-3 text-sm font-bold text-center" placeholder="EXERCÍCIO ${r+1}" value="${window.esc(userData.workoutPlan?.[k] || '')}"><div class="flex items-center gap-2 pl-2 text-center text-center text-center"><span class="text-[9px] font-black text-orange-500 uppercase">PR:</span><input type="text" data-key="${p}" class="workout-field bg-transparent border-b border-zinc-800 text-[11px] text-zinc-400 w-24 text-center outline-none" placeholder="EX: 34KG" value="${window.esc(userData.workoutPlan?.[p] || '')}"></div></div>`;
                                     }).join('')}
                                 </div>
                             </div>`).join('')}
@@ -440,35 +478,43 @@
 
         function renderStore(container) {
             const items = [{ id: 'shirt_discount', name: 'Desconto Camiseta', cost: 900, icon: 'tag' },{ id: 'custom_workout', name: 'Treino Especial', cost: 915, icon: 'scroll-text' },{ id: 'shirt_full', name: 'Camiseta Pryme', cost: 1350, icon: 'shirt' },{ id: 'monthly_discount', name: 'Desconto Mensal', cost: 2250, icon: 'percent' }];
-            container.innerHTML = `<div class="animate-fade-in space-y-6 italic text-center text-center"><div class="p-8 bg-pryme rounded-[3rem] text-black text-center text-center"><p class="text-black/60 text-[10px] font-black uppercase text-center text-center">Saldo Atual</p><h3 class="text-5xl font-black text-center text-center text-center">${userData.points || 0} PTS</h3></div><div class="grid grid-cols-1 gap-4 text-center text-center text-center">${items.map(item => `<div class="p-5 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between shadow-lg text-center text-center"><div class="flex items-center gap-4 text-center text-center text-center"><div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center text-center text-center text-center"><i data-lucide="${item.icon}" class="text-orange-500 text-center text-center text-center text-center"></i></div><div class="text-left text-white uppercase text-left text-white text-left text-left"><h4 class="font-bold text-sm text-left text-left">${window.esc(item.name)}</h4><p class="text-orange-500 text-[10px] font-black text-left text-left">${item.cost} PTS</p></div></div><button onclick="window.handlePurchase('${item.id}', ${item.cost})" class="px-5 py-2 rounded-2xl text-[10px] font-black uppercase bg-zinc-800 text-zinc-600 text-center text-center ${userData.points >= item.cost ? 'bg-orange-500 text-black active:scale-95' : ''}">Resgatar</button></div>`).join('')}</div></div>`;
+            container.innerHTML = `<div class="animate-fade-in space-y-6 italic text-center text-center"><div class="p-8 bg-pryme rounded-[3rem] text-black text-center text-center"><p class="text-black/60 text-[10px] font-black uppercase text-center">Saldo Atual</p><h3 class="text-5xl font-black text-center text-center">${userData.points || 0} PTS</h3></div><div class="grid grid-cols-1 gap-4 text-center">${items.map(item => `<div class="p-5 bg-zinc-900/50 border border-zinc-800 rounded-[2.5rem] flex items-center justify-between shadow-lg text-center text-center"><div class="flex items-center gap-4 text-center text-center text-center"><div class="w-14 h-14 bg-zinc-800 rounded-2xl flex items-center justify-center text-center"><i data-lucide="${item.icon}" class="text-orange-500 text-center"></i></div><div class="text-left text-white uppercase text-left text-white text-left text-left"><h4 class="font-bold text-sm text-left text-left text-left">${window.esc(item.name)}</h4><p class="text-orange-500 text-[10px] font-black text-left text-left text-left">${item.cost} PTS</p></div></div><button onclick="window.handlePurchase('${item.id}', ${item.cost})" class="px-5 py-2 rounded-2xl text-[10px] font-black uppercase bg-zinc-800 text-zinc-600 text-center ${userData.points >= item.cost ? 'bg-orange-500 text-black active:scale-95' : ''}">Resgatar</button></div>`).join('')}</div></div>`;
         }
 
         function renderProfile(container) {
             const av = userData.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${user.uid}`;
             container.innerHTML = `
-                <div class="animate-fade-in space-y-8 pb-10 flex flex-col items-center italic text-center text-center text-center">
-                    <div class="relative text-center text-center">
-                        <div class="w-36 h-36 rounded-[2.5rem] bg-zinc-900 border-4 border-orange-500 overflow-hidden shadow-2xl text-center text-center text-center"><img src="${av}" class="w-full h-full object-cover text-center text-center text-center" id="profile-avatar"></div>
-                        <button onclick="window.triggerPhotoUpload()" class="absolute -right-2 -bottom-2 w-12 h-12 bg-orange-500 rounded-2xl border-4 border-[#050505] flex items-center justify-center text-black active:scale-90 transition-transform text-center text-center text-center text-center"><i data-lucide="camera" class="w-5 h-5 text-center text-center text-center text-center"></i></button>
+                <div class="animate-fade-in space-y-8 pb-10 flex flex-col items-center italic text-center">
+                    <div class="relative text-center">
+                        <div class="w-36 h-36 rounded-[2.5rem] bg-zinc-900 border-4 border-orange-500 overflow-hidden shadow-2xl text-center"><img src="${av}" class="w-full h-full object-cover text-center" id="profile-avatar"></div>
+                        <button onclick="window.triggerPhotoUpload()" class="absolute -right-2 -bottom-2 w-12 h-12 bg-orange-500 rounded-2xl border-4 border-[#050505] flex items-center justify-center text-black active:scale-90 transition-transform text-center"><i data-lucide="camera" class="w-5 h-5 text-center"></i></button>
                         <input type="file" id="photo-upload" accept="image/*" onchange="window.handlePhotoChange(event)" style="display:none">
                     </div>
-                    <h2 class="text-3xl font-black uppercase text-white text-center text-center text-center text-center">${window.esc(userData.name || 'Atleta')}</h2>
-                    <div class="grid grid-cols-2 gap-4 w-full text-center text-center text-center text-center">
-                        <div class="p-6 glass-card rounded-[2.5rem] active:bg-zinc-800 transition-colors shadow-sm text-center text-center text-center text-center text-center" onclick="window.openModal('weight')"><p class="text-zinc-500 text-[10px] font-black uppercase text-center text-center text-center">Peso</p><h4 class="text-xl font-black text-white text-center text-center text-center">${userData.weight}KG</h4><i data-lucide="edit-2" class="w-3 h-3 text-orange-500 mx-auto mt-2 text-center text-center text-center"></i></div>
-                        <div class="p-6 glass-card rounded-[2.5rem] shadow-sm text-center text-center text-center text-center text-center"><p class="text-zinc-500 text-[10px] font-black uppercase text-center text-center text-center">Altura</p><h4 class="text-xl font-black text-white text-center text-center text-center">${userData.height}</h4></div>
+                    <h2 class="text-3xl font-black uppercase text-white text-center">${window.esc(userData.name || 'Atleta')}</h2>
+                    <div class="grid grid-cols-2 gap-4 w-full text-center">
+                        <div class="p-6 glass-card rounded-[2.5rem] active:bg-zinc-800 transition-colors shadow-sm text-center" onclick="window.openModal('weight')"><p class="text-zinc-500 text-[10px] font-black uppercase text-center text-center text-center">Peso</p><h4 class="text-xl font-black text-white text-center text-center text-center">${userData.weight}KG</h4><i data-lucide="edit-2" class="w-3 h-3 text-orange-500 mx-auto mt-2 text-center text-center"></i></div>
+                        <div class="p-6 glass-card rounded-[2.5rem] shadow-sm text-center text-center"><p class="text-zinc-500 text-[10px] font-black uppercase text-center">Altura</p><h4 class="text-xl font-black text-white text-center text-center">${userData.height}</h4></div>
                     </div>
-                    <div class="p-6 bg-zinc-900/30 border border-zinc-800 rounded-[2.5rem] flex justify-between w-full uppercase font-black text-center text-center text-center text-center">
-                        <div class="text-center text-center text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center text-center text-center">Pontos</p><h4 class="text-xl italic text-orange-500 text-center text-center text-center text-center">${userData.points || 0}</h4></div>
-                        <div class="text-center text-center text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center text-center text-center">Treinos</p><h4 class="text-xl italic text-white text-center text-center text-center text-center">${userData.totalCheckins || 0}</h4></div>
+                    <div class="p-6 bg-zinc-900/30 border border-zinc-800 rounded-[2.5rem] flex justify-between w-full uppercase font-black text-center">
+                        <div class="text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center">Pontos</p><h4 class="text-xl italic text-orange-500 text-center">${userData.points || 0}</h4></div>
+                        <div class="text-center"><p class="text-zinc-500 text-[10px] mb-1 text-center">Treinos</p><h4 class="text-xl italic text-white text-center">${userData.totalCheckins || 0}</h4></div>
                     </div>
                 </div>`;
         }
 
-        // --- MODAL HANDLERS ---
-        window.saveNotes = async () => { const val = document.getElementById('user-notes').value; if(await window.saveUserData({ notes: val })) { window.showToast("Anotado!"); window.closeModal(); } };
-        window.saveWorkout = async () => { const fields = document.querySelectorAll('.workout-field'); const plan = {}; fields.forEach(f => { if(f.dataset.key) plan[f.dataset.key] = f.value; }); if(await window.saveUserData({ workoutPlan: plan })) window.showToast("Planilha Salva!"); };
-        window.handlePurchase = async (i, c) => { if(userData.points >= c) { if(await window.saveUserData({ points: userData.points - c })) { window.showToast("Resgatado!"); renderApp(); } } else { window.showToast("Pontos insuficientes!", true); } };
-        window.confirmAccountDeletion = async () => { try { await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid)); location.reload(); } catch (e) { window.showToast("Erro ao eliminar.", true); } };
+        window.handleCheckin = async () => {
+            const today = window.getLocalDateString(); if (userData.lastCheckin === today) return window.showToast("Check-in já feito!", true);
+            const btn = document.getElementById('btn-checkin-action'); const originalHTML = btn.innerHTML;
+            btn.innerHTML = `<div class="w-8 h-8 border-4 border-black border-t-transparent rounded-full animate-spin"></div>`; btn.disabled = true;
+            if (!navigator.geolocation) { btn.innerHTML = originalHTML; btn.disabled = false; return window.showToast("GPS não suportado.", true); }
+            navigator.geolocation.getCurrentPosition(async (pos) => {
+                const dist = calculateDistance(pos.coords.latitude, pos.coords.longitude, GYM_LAT, GYM_LON);
+                if (dist > MAX_DISTANCE_METERS) { btn.innerHTML = originalHTML; btn.disabled = false; return window.showToast(`Chega mais perto da Pryme! (${Math.round(dist)}m)`, true); }
+                const pts = userData.plan === 'Pryme' ? 15 : (userData.plan === 'Wellhub' ? 4 : 3);
+                const updates = { lastCheckin: today, totalCheckins: (userData.totalCheckins || 0) + 1, points: (userData.points || 0) + pts, history: arrayUnion(today) };
+                if (await window.saveUserData(updates)) { window.showToast(`+${pts} PTS! TREINO PAGO!`); renderApp(); } else { btn.innerHTML = originalHTML; btn.disabled = false; }
+            }, () => { btn.innerHTML = originalHTML; btn.disabled = false; window.showToast("GPS negado ou sinal fraco!", true); }, { enableHighAccuracy: true, timeout: 8000 });
+        };
 
         window.openModal = async (type) => {
             const ov = document.getElementById('modal-overlay'); const t = document.getElementById('modal-title'); const c = document.getElementById('modal-content');
@@ -480,24 +526,27 @@
                 const curMonth = window.getLocalDateString().substring(0, 7);
                 let list = snap.docs.map(d => { const dta = d.data(); return { ...dta, monthly: (dta.history || []).filter(h => h.startsWith(curMonth)).length }; });
                 list = rankingMode === 'monthly' ? list.sort((a,b) => b.monthly - a.monthly) : list.sort((a,b) => (b.totalCheckins || 0) - (a.totalCheckins || 0));
-                document.getElementById('ranking-list').innerHTML = list.slice(0, 10).map((u, i) => `<div class="flex items-center justify-between bg-zinc-900/50 p-4 rounded-3xl border border-zinc-800 animate-fade-in"><div class="flex items-center gap-3"><span class="text-orange-500 font-black italic w-4">${i+1}</span><img src="${u.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.uid}`}" class="w-10 h-10 rounded-xl bg-zinc-800 object-cover text-center"><p class="font-bold text-sm text-white uppercase italic text-center">${window.esc(u.name ? u.name.split(' ')[0] : 'Atleta')}</p></div><p class="font-black text-white italic text-xs text-center">${rankingMode === 'monthly' ? u.monthly : (u.totalCheckins || 0)} TR</p></div>`).join('');
+                document.getElementById('ranking-list').innerHTML = list.slice(0, 10).map((u, i) => `<div class="flex items-center justify-between bg-zinc-900/50 p-4 rounded-3xl border border-zinc-800 animate-fade-in text-left text-center"><div class="flex items-center gap-3 text-center"><span class="text-orange-500 font-black italic w-4 text-center">${i+1}</span><img src="${u.photoURL || `https://api.dicebear.com/7.x/avataaars/svg?seed=${u.uid}`}" class="w-10 h-10 rounded-xl bg-zinc-800 object-cover text-center"><p class="font-bold text-sm text-white uppercase italic text-center">${window.esc(u.name ? u.name.split(' ')[0] : 'Atleta')}</p></div><p class="font-black text-white italic text-xs text-center">${rankingMode === 'monthly' ? u.monthly : (u.totalCheckins || 0)} TR</p></div>`).join('');
             }
             if(type === 'achievements') {
                 t.innerText = "Conquistas";
-                c.innerHTML = `<div class="grid grid-cols-2 gap-4 italic uppercase text-center">${Object.keys(achievementInfo).map(ach => { const has = (userData.titles || []).includes(ach); return `<div class="p-4 rounded-2xl border ${has ? 'border-orange-500 bg-orange-500/10' : 'border-zinc-800 bg-zinc-900/50 opacity-50'} text-center text-center"><i data-lucide="award" class="mx-auto mb-2 ${has ? 'text-orange-500' : 'text-zinc-600'} text-center text-center"></i><p class="font-bold text-[10px] tracking-widest text-center text-white text-center">${ach}</p></div>`; }).join('')}</div>`;
+                c.innerHTML = `<div class="grid grid-cols-2 gap-4 italic uppercase text-center">${Object.keys(achievementInfo).map(ach => { const has = (userData.titles || []).includes(ach); return `<div class="p-4 rounded-2xl border ${has ? 'border-orange-500 bg-orange-500/10' : 'border-zinc-800 bg-zinc-900/50 opacity-50'} text-center text-center"><i data-lucide="award" class="mx-auto mb-2 ${has ? 'text-orange-500' : 'text-zinc-600'} text-center text-center text-center text-center"></i><p class="font-bold text-[10px] tracking-widest text-center text-white text-center text-center text-center">${ach}</p></div>`; }).join('')}</div>`;
             }
             if(type === 'calendar') {
                 t.innerText = "Vista Anual";
                 const historySet = new Set(userData.history || []);
                 const months = ['Jan','Fev','Mar','Abr','Mai','Jun','Jul','Ago','Set','Out','Nov','Dez'];
-                c.innerHTML = `<div class="space-y-4 text-white italic border-t border-zinc-900 pt-4 text-center">${months.map((m, i) => { const days = new Date(new Date().getFullYear(), i + 1, 0).getDate(); return `<div class="bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50 text-center"><h4 class="text-[10px] font-black uppercase text-zinc-500 mb-2 italic tracking-widest text-center text-center text-center">${m}</h4><div class="grid grid-cols-7 gap-1 text-center">${Array.from({length: days}).map((_, d) => { const ds = new Date().getFullYear() + "-" + String(i+1).padStart(2,'0') + "-" + String(d+1).padStart(2,'0'); return `<div class="aspect-square rounded-sm ${historySet.has(ds) ? 'bg-orange-500 shadow-sm shadow-orange-500/50' : 'bg-zinc-800/40'} text-center text-center"></div>`; }).join('')}</div></div>`; }).join('')}</div>`;
+                c.innerHTML = `<div class="space-y-4 text-white italic border-t border-zinc-900 pt-4 text-center">${months.map((m, i) => { const days = new Date(new Date().getFullYear(), i + 1, 0).getDate(); return `<div class="bg-zinc-900/50 rounded-2xl p-4 border border-zinc-800/50 text-center"><h4 class="text-[10px] font-black uppercase text-zinc-500 mb-2 italic tracking-widest text-center text-center text-center text-center">${m}</h4><div class="grid grid-cols-7 gap-1 text-center text-center">/div></div>`; }).join('')}</div>`;
             }
-            if(type==='notes') { t.innerText = "Anotações"; c.innerHTML = `<textarea id="user-notes" class="w-full h-48 bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic font-bold text-left" placeholder="ANOTE RECORDES OU METAS...">${userData.notes || ''}</textarea><button onclick="window.saveNotes()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center text-black text-center">Salvar</button>`; }
-            if(type === 'pryme_upsell') { t.innerText = "Membro Pryme"; c.innerHTML = `<div class="space-y-6 italic text-center"><div class="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-center"><i data-lucide="zap" class="text-orange-500 w-10 h-10 text-center"></i></div><p class="text-sm font-bold text-white uppercase tracking-widest text-center">Turbina o Teu Progresso!</p><ul class="text-left space-y-4 text-xs text-zinc-400"><li class="flex items-center gap-3 text-center text-center"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center text-center"></i> 15 PTS por treino (Wellhub ganha 4)</li><li class="flex items-center gap-3 text-center"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center text-center"></i> Prioridade em Eventos</li><li class="flex items-center gap-3 text-center"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center text-center"></i> Descontos Exclusivos</li></ul><button onclick="window.showToast('Fala com o consultor na recepção!')" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center">Saber Mais</button></div>`; }
-            if(type==='confirm_delete') { t.innerText = "Eliminar Conta?"; c.innerHTML = `<div class="space-y-6 text-center"><p class="text-sm font-bold uppercase text-center text-white text-center text-center">Apagar todos os teus treinos e pontos?</p><button onclick="window.confirmAccountDeletion()" class="w-full bg-red-500 text-white p-5 rounded-3xl font-black uppercase text-center">Sim, Eliminar</button></div>`; }
-            if(type === 'weight') { t.innerText = "Peso"; c.innerHTML = `<input type="number" id="new-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-center text-3xl font-black text-white italic uppercase text-center" value="${userData.weight}"><button onclick="window.saveUserData({weight: parseFloat(document.getElementById('new-weight').value)}).then(()=>{window.closeModal();renderApp();})" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center">Salvar</button>`; }
+            if(type==='notes') { t.innerText = "Anotações"; c.innerHTML = `<textarea id="user-notes" class="w-full h-48 bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-white italic font-bold text-left text-left text-left" placeholder="ANOTE RECORDES OU METAS...">${userData.notes || ''}</textarea><button onclick="window.saveNotes()" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center text-black text-center text-center">Salvar</button>`; }
+            if(type === 'pryme_upsell') { t.innerText = "Membro Pryme"; c.innerHTML = `<div class="space-y-6 italic text-center text-center text-center text-center"><div class="w-20 h-20 bg-orange-500/20 rounded-full flex items-center justify-center mx-auto mb-4 text-center text-center text-center text-center"><i data-lucide="zap" class="text-orange-500 w-10 h-10 text-center text-center text-center text-center"></i></div><p class="text-sm font-bold text-white uppercase tracking-widest text-center text-center text-center">Turbina o Teu Progresso!</p><ul class="text-left space-y-4 text-xs text-zinc-400 text-center text-center text-center"><li class="flex items-center gap-3 text-center text-center text-center"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center text-center text-center text-center"></i> 15 PTS por treino (Wellhub ganha 4)</li><li class="flex items-center gap-3 text-center text-center text-center"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center text-center text-center text-center"></i> Prioridade em Eventos</li><li class="flex items-center gap-3 text-center text-center text-center"><i data-lucide="check-circle-2" class="text-orange-500 w-4 h-4 text-center text-center text-center text-center"></i> Descontos Exclusivos</li></ul><button onclick="window.showToast('Fala com o consultor na recepção!')" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase text-center text-center text-center">Saber Mais</button></div>`; }
+            if(type === 'weight') { t.innerText = "Peso"; c.innerHTML = `<input type="number" id="new-weight" class="w-full bg-zinc-900 border border-zinc-800 rounded-3xl p-5 text-center text-3xl font-black text-white italic uppercase text-center text-center" value="${userData.weight}"><button onclick="window.saveUserData({weight: parseFloat(document.getElementById('new-weight').value)}).then(()=>{window.closeModal();renderApp();})" class="w-full bg-orange-500 text-black p-5 rounded-3xl font-black mt-4 uppercase italic shadow-xl active:scale-95 transition-all text-center text-center text-center text-center">Salvar</button>`; }
+            if(type==='confirm_delete') { t.innerText = "Eliminar Conta?"; c.innerHTML = `<div class="space-y-6 text-center text-center"><p class="text-sm font-bold uppercase text-center text-white text-center text-center">Apagar todos os teus treinos e pontos?</p><button onclick="window.confirmAccountDeletion()" class="w-full bg-red-500 text-white p-5 rounded-3xl font-black uppercase text-center text-center">Sim, Eliminar</button></div>`; }
             lucide.createIcons();
         };
+
+        // --- START ---
+        startApp();
     </script>
 </body>
 </html>
