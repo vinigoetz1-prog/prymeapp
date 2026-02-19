@@ -250,19 +250,35 @@
             }
         };
         window.confirmAccountDeletion = async () => {
-            try {
-                await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid));
-                try {
-                    await deleteUser(user);
-                    window.showToast("Perfil eliminado!");
-                } catch (e) {
-                    window.showToast("Dados limpos. Login Google impede exclusão imediata do e-mail.", true);
-                }
-                setTimeout(() => window.location.reload(), 2000);
-            } catch (e) {
-                window.showToast("Erro ao eliminar dados.", true);
-            }
-        };
+  try {
+    // 1) Apaga os dados do Firestore (perfil)
+    await deleteDoc(doc(db, 'artifacts', appId, 'public', 'data', 'users', user.uid));
+
+    // 2) Tenta apagar o usuário do Auth (pode falhar por "recent-login")
+    try {
+      await deleteUser(user);
+      window.showToast("Conta eliminada com sucesso!");
+    } catch (e) {
+      // Não trava o fluxo por causa disso
+      window.showToast("Perfil apagado. Conta (login) pode exigir novo login para excluir.", true);
+    }
+
+    // 3) ✅ SEMPRE desloga (isso impede cair no onboarding automaticamente)
+    await signOut(auth);
+
+    // 4) Reseta estado local e volta pra tela de login
+    user = null;
+    userData = null;
+    currentTab = 'workout';
+    window.closeModal();
+    renderAuthUI();
+    window.showScreen('auth-screen');
+
+  } catch (e) {
+    window.showToast("Erro ao eliminar dados.", true);
+  }
+};
+
         window.setObFreq = (v) => {
             window.obData.freq = v;
             document.querySelectorAll('.ob-freq').forEach(b => {
@@ -782,3 +798,4 @@
     </script>
 </body>
 </html>
+
