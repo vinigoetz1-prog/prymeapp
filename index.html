@@ -124,7 +124,7 @@
 
     <script type="module">
         import { initializeApp } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-app.js';
-        import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithRedirect, getRedirectResult, deleteUser } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
+        import { getAuth, onAuthStateChanged, signOut, createUserWithEmailAndPassword, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect, getRedirectResult, deleteUser } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-auth.js';
         import { getFirestore, doc, getDoc, setDoc, updateDoc, collection, query, getDocs, arrayUnion, deleteDoc } from 'https://www.gstatic.com/firebasejs/11.6.1/firebase-firestore.js';
 
         const firebaseConfig = {
@@ -310,10 +310,23 @@
         };
 
         window.handleGoogleLogin = async () => {
-            const provider = new GoogleAuthProvider();
-            try { await signInWithRedirect(auth, provider); }
-            catch (e) { window.showToast(`Erro Google: ${e.code}`, true); }
-        };
+  const provider = new GoogleAuthProvider();
+  try {
+    const isMobile = /Android|iPhone|iPad|iPod/i.test(navigator.userAgent);
+
+    if (isMobile) {
+      // Celular: redirect é mais estável
+      await signInWithRedirect(auth, provider);
+    } else {
+      // PC: popup evita loop e é mais rápido
+      await signInWithPopup(auth, provider);
+    }
+  } catch (e) {
+    window.showToast(`Erro Google: ${e.code || e.message}`, true);
+    console.error("Erro Google:", e);
+  }
+};
+
 
         window.handleSignup = async () => {
             const email = document.getElementById('email').value.trim();
@@ -371,7 +384,11 @@
                     await syncUserData();
                     return;
                 }
-            } catch (e) { console.error("Erro Redirect:", e); }
+            } catch (e) {
+  console.error("Erro Redirect:", e);
+  window.showToast(`Google Redirect: ${e.code || e.message}`, true);
+}
+
 
             onAuthStateChanged(auth, async (u) => {
                 if (u) { user = u; await syncUserData(); } 
@@ -798,4 +815,5 @@
     </script>
 </body>
 </html>
+
 
